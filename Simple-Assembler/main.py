@@ -6,7 +6,7 @@ from sys import stdin
 
 ls_inputs = []
 for input_line in stdin:
-    if input_line == '': # If empty string is read then stop the loop
+    if input_line == '':
         break
     ls_inputs.append(input_line)
 
@@ -25,7 +25,7 @@ for line in ls_inputs:
         VALID = False
         break
     if lineTypesMatch(line) ==  -1:
-        error_tracker.append(f'ERROR (Invalid Register): Wrong Syntax used for Instruction {line_comps[0]}, kindly use acceptable argument(s) only which in case of {line_comps[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comps[0]]]}')
+        error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction {line_comps[0]}, kindly use acceptable argument(s) only which in case of {line_comps[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comps[0]]]}')
         VALID = False
         break
     if lineTypesMatch(line) ==  -2:
@@ -51,3 +51,4 @@ if HLT_COUNT > 1:
 if HLT_COUNT == 1 and ls_inputs[-1] != 'hlt':
     error_tracker.append(f'ERROR (hlt): hlt not present as last instruction')
     VALID = False
+
