@@ -27,17 +27,16 @@ def lineTypesMatch(line):
     """Checks if the objects in the line match the objects which they were supposed to be i.e. registers
     are in place of registers in the syntax and so on"""
     ls_input = list(map(str, line.split()))
-    valid = True
     ls_type_order = type_to_syntaxconstituents[OPcode_table[ls_input[0]][-1]]
     for i in range(1, len(ls_input)):
         if ls_type_order[i] == 'Register':
             if isRegisterValid(ls_input[i]) is False:
-                valid = False
-                break
+                return -1
         elif ls_type_order[i] == 'Immediate':
             if isImmediateValid(ls_input[i]) is False:
-                valid = False
-                break
+                return -2
+            if isImmediateRangeValid(ls_input[i]) is False:
+                return -3
         else:
             pass
-    return valid
+    return 0

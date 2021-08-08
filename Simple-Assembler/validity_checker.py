@@ -22,11 +22,14 @@ def isImmediateValid(immediate):
     """Checks if instruction is valid"""
     if immediate[0] != '$':
         return False
+    else:
+        return False
+
+def isImmediateRangeValid(immediate):
     if int(immediate[1:]) >= 0 and int(immediate[1:]) <= 255:
         return True
     else:
         return False
-
 
 def isSizeRight(instruction, ls):
     """Checks if required number of arguments are there or not"""

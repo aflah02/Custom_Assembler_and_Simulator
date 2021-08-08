@@ -11,6 +11,7 @@ for input_line in stdin:
     ls_inputs.append(input_line)
 
 VALID = True
+HLT_COUNT = 0
 error_tracker = []
 
 for line in ls_inputs:
@@ -28,7 +29,25 @@ for line in ls_inputs:
         VALID = False
         break
     if lineTypesMatch(line) ==  -2:
-        error_tracker.append(f'ERROR (Invalid Immediate): Wrong Syntax used for Instruction {line_comps[0]}, kindly use acceptable argument(s) only which in case of {line_comps[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comps[0]]]}')
+        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction {line_comps[0]}, kindly use acceptable argument(s) only which in case of {line_comps[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comps[0]]]}')
         VALID = False
         break
-    
+    if lineTypesMatch(line) ==  -3:
+        error_tracker.append(f'ERROR (Invalid Immediate (Out of Range)): Kindly use Immediates between 0 and 255 (Inclusive of both Limits)')
+        VALID = False
+        break
+    if 'hlt' in line_comps:
+        HLT_COUNT += 1
+
+
+if HLT_COUNT == 0:
+    error_tracker.append(f'ERROR (hlt): No hlt instruction present')
+    VALID = False
+
+if HLT_COUNT > 1:
+    error_tracker.append(f'ERROR (hlt): Multiple hlt instruction present')
+    VALID = False
+
+if HLT_COUNT == 1 and ls_inputs[-1] != 'hlt':
+    error_tracker.append(f'ERROR (hlt): hlt not present as last instruction')
+    VALID = False
