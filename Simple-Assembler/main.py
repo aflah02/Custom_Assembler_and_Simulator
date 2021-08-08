@@ -9,4 +9,5 @@ for input_line in stdin:
         break
     ls_inputs.append(input_line)
 
-# for input in ls_inputs:
+for line in ls_inputs:
+    x = isValid(line)
