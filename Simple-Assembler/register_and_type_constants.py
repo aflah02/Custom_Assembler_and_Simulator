@@ -68,3 +68,15 @@ register_to_encoding = {
     'R6': '110',
     'FLAGS': '111',
 }
+'''
+type_to_syntaxconstituents tells us about the different type constitutents 
+in the syntax and their order like registers, immediates, etc.
+'''
+type_to_syntaxconstituents = {
+    'A':['Instruction','Register','Register','Register'],
+    'B':['Instruction','Register','Immediate'],
+    'C':['Instruction','Register','Register'],
+    'D':['Instruction','Register','Memory Address'],
+    'E':['Instruction','Memory Address'],
+    'F':['Instruction']
+}
