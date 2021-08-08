@@ -1,6 +1,6 @@
 from general_consts import *
 from register_and_type_constants import *
-
+from OPcode_table import *
 
 def isInstructionValid(instruction):
     """Checks if instruction is valid"""
@@ -26,11 +26,9 @@ def isImmediateValid(immediate):
         return False
 
 
-def getRegisterEncoding(register):
-    """Returns Register Encoding"""
-    return register_to_encoding[register]
-
-
-def getRegisterCount(type):
-    """Returns Register Count"""
-    return type_to_reg_no[type]
+def isSizeRight(instruction, ls):
+    """Checks if required number of arguments are there or not"""
+    type_instruction = OPcode_table[instruction][-1]
+    if len(ls) == type_to_input_len[type_instruction]:
+        return True
+    return False

@@ -10,6 +10,17 @@ type_to_reg_no = {
     'F':0
 }
 '''
+type_to_input_len tells us how many space separated items will be there per type
+'''
+type_to_input_len = {
+    'A':4,
+    'B':3,
+    'C':3,
+    'D':3,
+    'E':2,
+    'F':1
+}
+'''
 type_to_imm_no tells us how many immediates are there per type
 '''
 type_to_imm_no = {
