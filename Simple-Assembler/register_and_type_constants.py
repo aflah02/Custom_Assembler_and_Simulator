@@ -1,3 +1,6 @@
+'''
+type_to_reg_no tells us how many registers are there per type
+'''
 type_to_reg_no = {
     'A':3,
     'B':1,
@@ -6,6 +9,9 @@ type_to_reg_no = {
     'E':0,
     'F':0
 }
+'''
+type_to_imm_no tells us how many immediates are there per type
+'''
 type_to_imm_no = {
     'A':0,
     'B':1,
@@ -14,6 +20,9 @@ type_to_imm_no = {
     'E':0,
     'F':0
 }
+'''
+type_to_unusedbits tells us how many unused bits are there per type
+'''
 type_to_unusedbits = {
     'A':2,
     'B':0,
@@ -22,6 +31,11 @@ type_to_unusedbits = {
     'E':3,
     'F':11
 }
+'''
+type_to_memoryaddress tells us how many memory addresses are there per type since at max only 1
+can be there this acts as a boolean dict too telling us if the particular instruction type supports memory 
+addresses or not
+'''
 type_to_memoryaddress = {
     'A':0,
     'B':0,
@@ -30,6 +44,9 @@ type_to_memoryaddress = {
     'E':1,
     'F':0
 }
+'''
+register_to_encoding tells us the encoding of a register
+'''
 register_to_encoding = {
     'RO': '000',
     'R1': '001',
