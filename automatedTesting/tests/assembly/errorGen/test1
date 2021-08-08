@@ -1,0 +1,25 @@
+var xyz
+add R0 R1 R2
+add R0 $100
+add R0 $ab1211
+add R0 R1
+add R0 myvar
+add xyz
+add
+agagag
+label:
+mylabel: add R0 R1 R2
+mylabel: add R0 $100
+mylabel: add R0 R1
+label: label: add R0 R1 R3
+label: label: add R0 R1 R3 R4
+label: label: $4
+label: R0 R1 R3
+var
+efff-ddd:
+fgff;dd
+label: adc R0 R1 R1
+mylabel: add R0 myvar
+mylabel: add xyz
+mylabel: add
+var xyz R0

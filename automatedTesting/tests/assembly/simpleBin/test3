@@ -1,0 +1,7 @@
+mov R1 $5
+mov R1 $5
+mov R1 $5
+mov R1 $5
+mov R1 $5
+mov R1 $5
+hlt
