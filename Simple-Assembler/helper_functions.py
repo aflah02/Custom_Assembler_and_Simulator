@@ -15,13 +15,15 @@ def getRegisterCount(type):
 def isLineValid(line):
     """Checks if line is valid that is the instruction is valid and the size corresponds to the instruction"""
     ls_input = list(map(str, line.split()))
-    if isInstructionValid(ls_input[0]) is False or isSizeRight(ls_input[0], ls_input) is False:
-        return False
+    if isInstructionValid(ls_input[0]) == False:
+        return -1
+    if isSizeRight(ls_input[0], ls_input) == False:
+        return -2
     else:
-        return True
+        return 1
 
 
-def lineTypeChecks(line):
+def lineTypesMatch(line):
     """Checks if the objects in the line match the objects which they were supposed to be i.e. registers
     are in place of registers in the syntax and so on"""
     ls_input = list(map(str, line.split()))
@@ -31,9 +33,11 @@ def lineTypeChecks(line):
         if ls_type_order[i] == 'Register':
             if isRegisterValid(ls_input[i]) is False:
                 valid = False
+                break
         elif ls_type_order[i] == 'Immediate':
             if isImmediateValid(ls_input[i]) is False:
                 valid = False
+                break
         else:
             pass
     return valid
