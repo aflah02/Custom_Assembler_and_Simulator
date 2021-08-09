@@ -11,6 +11,22 @@ def getRegisterCount(type):
     """Returns Register Count"""
     return type_to_reg_no[type]
 
+def isVarValid(line_comp, count, alphanum):
+    a = line_comp[1]
+    b = len(a)
+    counter = 0
+    if line_comp[0]=='var':
+        if count!=1:
+            return -1
+        else:
+            for i in a:
+                if i in alphanum:
+                    counter+=1
+            if counter==b:
+                return -2
+            else:
+                return -3
+            
 
 def isLineValid(line):
     """Checks if line is valid that is the instruction is valid and the size corresponds to the instruction"""
