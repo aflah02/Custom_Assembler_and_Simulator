@@ -43,8 +43,34 @@ def isVarValid(var_declared,var_called,alphanum,inst):
 def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
     inst.append('var')
     for i in lbl_declared:
-    
-
+        count2 = 0
+        a = i[0]
+        b = len(a)
+        count = 0
+        for i in a:
+            if i in alphanum:
+                count+=1
+        if count!=b:
+            return -1
+        else:
+            c = lbl_inst[count2]
+            if isLineValid(c)!=0 or lineTypesMatch(c)!=0:
+                return -2
+        count2+=1
+    count3 = 0
+    b2 = len(lbl_called)
+    lbl2 = []
+    for i in lbl_declared:
+        lbl2.append(i[0])
+    for i in lbl_called:
+        if i in lbl2:
+            count3+=1
+    if count3!=b2:
+        return -3 
+    for i in lbl2:
+        if i in inst:
+            return -4
+    return 0
 def Duplication(lbl_declared,var_declared): #add in main
     count = 0
     for i in var_declared:
@@ -60,8 +86,8 @@ def isLineValid(line_comp):
         return -1
     if isSizeRight(line_comp[0], line_comp) == False:
         return -2
-    else:
-        return 0
+    
+    return 0
 
 
 def lineTypesMatch(line_comp):
@@ -94,8 +120,8 @@ def lineTypesMatch(line_comp):
                     else:
                         return -8
                 
-                else:
-                    #if isLabelValid() false
-                    #return -9
+                '''else:
+                    if isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum)!=0:
+                        return -9'''
             
     return 0
