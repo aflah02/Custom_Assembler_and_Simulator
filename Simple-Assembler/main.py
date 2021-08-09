@@ -22,6 +22,18 @@ lbl_called = []
 for line in ls_inputs:
     line = line.strip()
     line_comps = list(map(str, line.split()))
+    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -1:
+        error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
+        VALID = False
+        break  
+    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -2:
+        var_declared.append(line_comp[-1])
+        LINE_COUNT = LINE_COUNT - 1
+        continue
+    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -3:
+        error_tracker.append(f'ERROR (Variable): Illegal variable name')
+        VALID = False
+        break 
     if isLineValid(line) == -1:
         error_tracker.append(f'ERROR: No Such Instruction Found as {line_comps[0]}')
         VALID = False
@@ -48,17 +60,7 @@ for line in ls_inputs:
         break
     if 'hlt' in line_comps:
         HLT_COUNT += 1
-    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -1:
-        error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
-        VALID = False
-        break  
-    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -2:
-        var_declared.append(line_comp[-1])
-        LINE_COUNT = LINE_COUNT - 1
-    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -3:
-        error_tracker.append(f'ERROR (Variable): Illegal variable name')
-        VALID = False
-        break 
+    
     LINE_COUNT+=1
 
 if HLT_COUNT == 0:
