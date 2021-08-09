@@ -57,39 +57,42 @@ for line in ls_inputs:
             c = (b,LINE_COUNT3)
             var_declared.append(c)
     LINE_COUNT3+=1
+if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -1:
+    error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
+    VALID = False 
+if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -2:
+    error_tracker.append(f'ERROR (Variable): Variable name incorrect')
+    VALID = False
+        
+if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -3:
+    error_tracker.append(f'ERROR (Variable): Variable called was never declared')
+    VALID = False 
+if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -4:
+    error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction')
+    VALID = False
 for line in ls_inputs:
     line = line.strip()
-    line_comps = list(map(str, line.split()))
-    if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -1:
-        error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
-        VALID = False
-        break  
-    if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -2:
-        error_tracker.append(f'ERROR (Variable): Variable name incorrect')
-        VALID = False
-        break 
-    if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -3:
-        error_tracker.append(f'ERROR (Variable): Variable called was never declared')
-        VALID = False
-        break 
-    if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -4:
-        error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction')
-        VALID = False
-        break 
+    line_comp = list(map(str, line.split()))
+    a = line_comp[0]
+    if a[-1::]==':':
+        continue
+    if line_comp[0]=="var":
+        LINE_COUNT-=1
+        continue
     if isLineValid(line) == -1:
-        error_tracker.append(f'ERROR: No Such Instruction Found as {line_comps[0]}')
+        error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]}')
         VALID = False
         break
     if isLineValid(line) == -2:
-        error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comps[0]}, please note it is a Type {OPcode_table[line_comps[0]]} which requires {type_to_input_len[line_comps[0]]} arguments including the instruction')
+        error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comp[0]}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[line_comp[0]]} arguments including the instruction')
         VALID = False
         break
     if lineTypesMatch(line) ==  -1:
-        error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction {line_comps[0]}, kindly use acceptable argument(s) only which in case of {line_comps[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comps[0]]]}')
+        error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]]]}')
         VALID = False
         break
     if lineTypesMatch(line) ==  -2:
-        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction {line_comps[0]}, kindly use acceptable argument(s) only which in case of {line_comps[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comps[0]]]}')
+        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]]]}')
         VALID = False
         break
     if lineTypesMatch(line) ==  -3:
