@@ -26,14 +26,14 @@ for line in ls_inputs:
         error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
         VALID = False
         break  
-    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -2:
-        var_declared.append(line_comp[-1])
-        LINE_COUNT = LINE_COUNT - 1
-        continue
     if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -3:
         error_tracker.append(f'ERROR (Variable): Illegal variable name')
         VALID = False
         break 
+    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -2:
+        var_declared.append(line_comp[-1])
+        LINE_COUNT = LINE_COUNT - 1
+        continue
     if isLineValid(line) == -1:
         error_tracker.append(f'ERROR: No Such Instruction Found as {line_comps[0]}')
         VALID = False
