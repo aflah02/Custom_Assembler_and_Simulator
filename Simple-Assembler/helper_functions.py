@@ -12,6 +12,7 @@ def getRegisterCount(type):
     return type_to_reg_no[type]
 
 def isVarValid(var_declared,var_called,alphanum,inst):
+    inst.append('var')
     for i in var_declared:
         if i[1]!=1:
             return -1
@@ -38,19 +39,20 @@ def isVarValid(var_declared,var_called,alphanum,inst):
     if count2!=b2:
         return -3 
     return 0 #no issues all variables declared and called are valid
-def isLabelValid(line_comp,alphanum):
-    a = line_comp[0]
-    counter = 0
-    b = len(a) - 1
-    if a[-1::] = ":":
-        for i in a:
-            if i in aplhanum:
-                counter+=1
-        if counter == b:
-            
-                
-        else:
-            return -1 
+
+def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
+    inst.append('var')
+    for i in lbl_declared:
+    
+
+def Duplication(lbl_declared,var_declared): #add in main
+    count = 0
+    for i in var_declared:
+        if i in lbl_declared:
+            count+=1
+    if count>0:
+        return -1
+    return 0
         
 def isLineValid(line_comp):
     """Checks if line is valid that is the instruction is valid and the size corresponds to the instruction"""
@@ -59,7 +61,7 @@ def isLineValid(line_comp):
     if isSizeRight(line_comp[0], line_comp) == False:
         return -2
     else:
-        return 1
+        return 0
 
 
 def lineTypesMatch(line_comp):
@@ -77,14 +79,23 @@ def lineTypesMatch(line_comp):
                 return -2
             if isImmediateRangeValid(line_comp[i]) is False:
                 return -3
-        if ls_type_order[i] == 'Memory Address':
+        if ls_type_order[i] == 'Memory Address': #start from here
             if line_comp[0]=='ld' or line_comp[0]=='st':
-                if line_comp[-1] in var_declared:
-                if line_comp[-1] in lbl_declared: #illegal use
+                if line_comp[-1] not in var_declared:
+                    if line_comp[-1] in lbl_declared: #illegal use
+                        return -5
+                    else:
+                        return -6
+                    
             if line_comp[0]=='jmp' or line_comp[0]=='jlt' or line_comp[0]=='jgt' or line_comp[0]=='je': 
-                if line_comp[-1] in var_declared: #illegal use
-                if line_comp[-1] in lbl_declared:
-                else
-            else:
-                return -5
+                if line_comp[-1] not in lbl_declared:
+                    if line_comp[-1] in var_declared: #illegal use
+                        return -7
+                    else:
+                        return -8
+                
+                else:
+                    #if isLabelValid() false
+                    #return -9
+            
     return 0
