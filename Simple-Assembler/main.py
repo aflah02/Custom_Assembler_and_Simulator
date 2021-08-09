@@ -13,6 +13,7 @@ for input_line in stdin:
 VALID = True
 HLT_COUNT = 0
 error_tracker = []
+LINE_COUNT = 0
 
 for line in ls_inputs:
     line = line.strip()
@@ -43,7 +44,17 @@ for line in ls_inputs:
         break
     if 'hlt' in line_comps:
         HLT_COUNT += 1
-
+    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -1:
+        error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
+        VALID = False
+        break  
+    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -2:
+        LINE_COUNT = LINE_COUNT - 1
+    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -3:
+        error_tracker.append(f'ERROR (Variable): Illegal variable name')
+        VALID = False
+        break 
+    LINE_COUNT+=1
 
 if HLT_COUNT == 0:
     error_tracker.append(f'ERROR (hlt): No hlt instruction present')
