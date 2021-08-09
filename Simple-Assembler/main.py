@@ -13,6 +13,17 @@ for input_line in stdin:
 VALID = True
 HLT_COUNT = 0
 error_tracker = []
+alphanum = []
+for k in range(65,91):
+    b = chr(k)
+    alphanum.append(b)
+for k in range(97,123):
+    b = chr(k)
+    alphanum.append(b)
+for k in range(48,58):
+    b = chr(k)
+    alphanum.append(b)
+alphanum.append(chr(95))
 
 for line in ls_inputs:
     line = line.strip()
