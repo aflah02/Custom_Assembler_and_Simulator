@@ -75,11 +75,21 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
     return 0
 def Duplication(lbl_declared,var_declared): #add in main
     count = 0
+    count2 = 0
+    count3 = 0
+    a = len(lbl_declared)
     for i in var_declared:
         if i in lbl_declared:
             count+=1
+    for i in range(0,a):
+        a2 = lbl_declared[i][0]
+        for j in range(i+1,a):
+            if a2==lbl_declared[j][0]:
+                count2+=1
     if count>0:
         return -1
+    if count2>0:
+        return -2
     return 0
         
 def isLineValid(line_comp):
