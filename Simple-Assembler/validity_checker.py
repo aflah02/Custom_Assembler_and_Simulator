@@ -13,7 +13,10 @@ def isInstructionValid(instruction):
 def isRegisterValid(register):
     """Checks if register is valid"""
     if register in ls_registers:
-        return True
+        if register == 'FLAGS':
+            return -1
+        else:
+            return True
     else:
         return False
 
