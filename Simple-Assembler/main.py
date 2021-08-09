@@ -30,7 +30,7 @@ for line in ls_inputs:
     for i in range(1,b):
         lbl_inst.append(i)
     lbl_instf.append(lbl_inst)
-    if a[-1::] = ":":
+    if a[-1::] == ":":
         b = a[:-1:]
         c = LINE_COUNT2
         d = (b,c)
@@ -40,7 +40,7 @@ for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
     a = line_comp[0]
-    if a[-1::] = ":":
+    if a[-1::] == ":":
         if line_comp[1]=='ld' or line_comp[1]=='st':
             b = line_comp[-1]
             var_called.append(b)
