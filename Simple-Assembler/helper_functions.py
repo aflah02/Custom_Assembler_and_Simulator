@@ -32,6 +32,8 @@ def lineTypesMatch(line):
         if ls_type_order[i] == 'Register':
             if isRegisterValid(ls_input[i]) is False:
                 return -1
+            if isRegisterValid(ls_input[i])==-1:
+                return -4
         elif ls_type_order[i] == 'Immediate':
             if isImmediateValid(ls_input[i]) is False:
                 return -2
