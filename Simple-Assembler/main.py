@@ -37,6 +37,10 @@ for line in ls_inputs:
         error_tracker.append(f'ERROR (Invalid Immediate (Out of Range)): Kindly use Immediates between 0 and 255 (Inclusive of both Limits)')
         VALID = False
         break
+    if lineTypesMatch(line) ==  -4:
+        error_tracker.append(f'ERROR Invalid use of FLAGS register')
+        VALID = False
+        break
     if 'hlt' in line_comps:
         HLT_COUNT += 1
 
