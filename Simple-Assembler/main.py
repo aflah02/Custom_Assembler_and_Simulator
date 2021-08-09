@@ -15,6 +15,7 @@ HLT_COUNT = 0
 error_tracker = []
 LINE_COUNT = 1
 LINE_COUNT2 = 1
+LINE_COUNT3 = 1
 var_declared = []
 var_called = []
 lbl_declared = []
@@ -53,8 +54,9 @@ for line in ls_inputs:
     if len(line_comp)==2:
         if line_comp[0] == "var":
             b = line_comp[-1]
-            var_declared.append(b)
-
+            c = (b,LINE_COUNT3)
+            var_declared.append(c)
+    LINE_COUNT3+=1
 for line in ls_inputs:
     line = line.strip()
     line_comps = list(map(str, line.split()))
