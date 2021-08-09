@@ -11,7 +11,7 @@ def getRegisterCount(type):
     """Returns Register Count"""
     return type_to_reg_no[type]
 
-def isVarValid(var_declared,var_called,alphanum):
+def isVarValid(var_declared,var_called,alphanum,inst):
     for i in var_declared:
         if i[1]!=1:
             return -1
@@ -29,11 +29,14 @@ def isVarValid(var_declared,var_called,alphanum):
     var2 = []
     for i in var_declared:
         var2.append(i[0])
+    for i in var2:
+        if i in inst:
+            return -4
     for i in var_called:
         if i in var2:
             count2+=1
     if count2!=b2:
-        return -3
+        return -3 
     return 0 #no issues all variables declared and called are valid
 def isLabelValid(line_comp,alphanum):
     a = line_comp[0]
@@ -77,7 +80,9 @@ def lineTypesMatch(line_comp):
         if ls_type_order[i] == 'Memory Address':
             if line_comp[0]=='ld' or line_comp[0]=='st':
                 if line_comp[-1] in var_declared:
+                if line_comp[-1] in lbl_declared: #illegal use
             if line_comp[0]=='jmp' or line_comp[0]=='jlt' or line_comp[0]=='jgt' or line_comp[0]=='je': 
+                if line_comp[-1] in var_declared: #illegal use
                 if line_comp[-1] in lbl_declared:
                 else
             else:
