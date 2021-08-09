@@ -12,7 +12,8 @@ def getRegisterCount(type):
     return type_to_reg_no[type]
 
 def isVarValid(var_declared,var_called,alphanum,inst):
-    inst.append('var')
+    inst2 = inst.copy()
+    inst2.append('var')
     for i in var_declared:
         if i[1]!=1:
             return -1
@@ -31,7 +32,7 @@ def isVarValid(var_declared,var_called,alphanum,inst):
     for i in var_declared:
         var2.append(i[0])
     for i in var2:
-        if i in inst:
+        if i in inst2:
             return -4
     for i in var_called:
         if i in var2:
@@ -41,7 +42,8 @@ def isVarValid(var_declared,var_called,alphanum,inst):
     return 0 #no issues all variables declared and called are valid
 
 def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
-    inst.append('var')
+    inst2 = inst.copy()
+    inst2.append('var')
     for i in lbl_declared:
         count2 = 0
         a = i[0]
@@ -68,7 +70,7 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
     if count3!=b2:
         return -3 
     for i in lbl2:
-        if i in inst:
+        if i in inst2:
             return -4
     return 0
 def Duplication(lbl_declared,var_declared): #add in main
