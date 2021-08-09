@@ -68,14 +68,37 @@ if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -1:
     VALID = False 
 if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -2:
     error_tracker.append(f'ERROR (Variable): Variable name incorrect')
-    VALID = False
-        
+    VALID = False   
 if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -3:
     error_tracker.append(f'ERROR (Variable): Variable called was never declared')
     VALID = False 
 if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -4:
     error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction')
     VALID = False
+    
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -1:
+    error_tracker.append(f'ERROR (Label): Invalid label name')
+    VALID = False
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -2:
+    error_tracker.append(f'ERROR (Label): Invalid label instruction')
+    VALID = False
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -3:
+    error_tracker.append(f'ERROR (Label): Invalid label called')
+    VALID = False
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -4:
+    error_tracker.append(f'ERROR (Label): Label name is the same as an instruction')
+    VALID = False
+
+if Duplication(lbl_declared,var_declared)==-1:
+    error_tracker.append(f'ERROR (Label/Var): Label name is the same as a variable')
+    VALID = False
+if Duplication(lbl_declared,var_declared)==-2:
+    error_tracker.append(f'ERROR (Label): A label was declared more than once')
+    VALID = False
+if Duplication(lbl_declared,var_declared)==-3:
+    error_tracker.append(f'ERROR (Var): A variable was declared more than once')
+    VALID = False
+    
 for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
@@ -85,28 +108,36 @@ for line in ls_inputs:
     if line_comp[0]=="var":
         LINE_COUNT-=1
         continue
-    if isLineValid(line) == -1:
+    if isLineValid(line_comp) == -1:
         error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]}')
         VALID = False
         break
-    if isLineValid(line) == -2:
+    if isLineValid(line_comp) == -2:
         error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comp[0]}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[line_comp[0]]} arguments including the instruction')
         VALID = False
         break
-    if lineTypesMatch(line) ==  -1:
+    if lineTypesMatch(line_comp) == -1:
         error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]]]}')
         VALID = False
         break
-    if lineTypesMatch(line) ==  -2:
+    if lineTypesMatch(line_comp) == -2:
         error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]]]}')
         VALID = False
         break
-    if lineTypesMatch(line) ==  -3:
+    if lineTypesMatch(line_comp) == -3:
         error_tracker.append(f'ERROR (Invalid Immediate (Out of Range)): Kindly use Immediates between 0 and 255 (Inclusive of both Limits)')
         VALID = False
         break
-    if lineTypesMatch(line) ==  -4:
+    if lineTypesMatch(line_comp) == -4:
         error_tracker.append(f'ERROR Invalid use of FLAGS register')
+        VALID = False
+        break
+    if lineTypesMatch(line_comp) == -5 or lineTypesMatch(line_comp) == -8:
+        error_tracker.append(f'ERROR Invalid use of label')
+        VALID = False
+        break
+    if lineTypesMatch(line_comp) == -6 or lineTypesMatch(line_comp) == -7:
+        error_tracker.append(f'ERROR Invalid use of variable')
         VALID = False
         break
     if 'hlt' in line_comps:
