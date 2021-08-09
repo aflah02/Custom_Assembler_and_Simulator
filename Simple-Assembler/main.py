@@ -21,16 +21,17 @@ lbl_declared = []
 lbl_called = []
 for line in ls_inputs:
     line = line.strip()
-    line_comps = list(map(str, line.split()))
+    line_comp = list(map(str, line.split()))
     a = line_comp[0]
     if a[-1::] = ":":
         b = a[:-1:]
         c = LINE_COUNT2
         d = (b,c)
         lbl_declared.append(d)
+        
 for line in ls_inputs:
     line = line.strip()
-    line_comps = list(map(str, line.split()))
+    line_comp = list(map(str, line.split()))
     a = line_comp[0]
     if a[-1::] = ":":
         if line_comp[1]=='ld' or line_comp[1]=='st':
@@ -45,6 +46,15 @@ for line in ls_inputs:
     if line_comp[0]=='jmp' or line_comp[0]=='jlt' or line_comp[0]=='jgt' or line_comp[0]=='je': 
         b = line_comp[-1]
         lbl_called.append(b)
+
+for line in ls_inputs:
+    line = line.strip()
+    line_comp = list(map(str, line.split()))
+    if len(line_comp)==2:
+        if line_comp[0] == "var":
+            b = line_comp[-1]
+            var_declared.append(b)
+
 for line in ls_inputs:
     line = line.strip()
     line_comps = list(map(str, line.split()))
