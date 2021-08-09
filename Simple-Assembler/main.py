@@ -15,6 +15,7 @@ HLT_COUNT = 0
 error_tracker = []
 
 for line in ls_inputs:
+    line = line.strip()
     line_comps = list(map(str, line.split()))
     if isLineValid(line) == -1:
         error_tracker.append(f'ERROR: No Such Instruction Found as {line_comps[0]}')
