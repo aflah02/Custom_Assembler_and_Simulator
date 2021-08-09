@@ -20,10 +20,16 @@ var_declared = []
 var_called = []
 lbl_declared = []
 lbl_called = []
+lbl_instf = []
 for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
     a = line_comp[0]
+    b = len(line_comp)
+    lbl_inst = []
+    for i in range(1,b):
+        lbl_inst.append(i)
+    lbl_instf.append(lbl_inst)
     if a[-1::] = ":":
         b = a[:-1:]
         c = LINE_COUNT2
