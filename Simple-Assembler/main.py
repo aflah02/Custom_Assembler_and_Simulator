@@ -14,6 +14,10 @@ VALID = True
 HLT_COUNT = 0
 error_tracker = []
 LINE_COUNT = 0
+var_declared = []
+var_called = []
+lbl_declared = []
+lbl_called = []
 
 for line in ls_inputs:
     line = line.strip()
@@ -49,6 +53,7 @@ for line in ls_inputs:
         VALID = False
         break  
     if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -2:
+        var_declared.append(line_comp[-1])
         LINE_COUNT = LINE_COUNT - 1
     if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -3:
         error_tracker.append(f'ERROR (Variable): Illegal variable name')
