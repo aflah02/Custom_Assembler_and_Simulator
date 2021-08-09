@@ -60,18 +60,22 @@ for line in ls_inputs:
 for line in ls_inputs:
     line = line.strip()
     line_comps = list(map(str, line.split()))
-    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -1:
+    if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -1:
         error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
         VALID = False
         break  
-    if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -3:
-        error_tracker.append(f'ERROR (Variable): Illegal variable name')
+    if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -2:
+        error_tracker.append(f'ERROR (Variable): Variable name incorrect')
         VALID = False
         break 
-    '''if isVarValid(line_comp,LINE_COUNT, alphanum) ==  -2:
-        var_declared.append(line_comp[-1])
-        LINE_COUNT = LINE_COUNT - 1
-        continue'''
+    if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -3:
+        error_tracker.append(f'ERROR (Variable): Variable called was never declared')
+        VALID = False
+        break 
+    if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -4:
+        error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction')
+        VALID = False
+        break 
     if isLineValid(line) == -1:
         error_tracker.append(f'ERROR: No Such Instruction Found as {line_comps[0]}')
         VALID = False
