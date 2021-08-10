@@ -110,7 +110,7 @@ def isLineValid(line_comp):
     return 0
 
 
-def lineTypesMatch(line_comp):
+def lineTypesMatch(line_comp,lbl_declared,var_declared):
     """Checks if the objects in the line match the objects which they were supposed to be i.e. registers
     are in place of registers in the syntax and so on"""
     ls_type_order = type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]
