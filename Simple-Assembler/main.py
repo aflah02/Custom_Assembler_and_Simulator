@@ -140,7 +140,7 @@ for line in ls_inputs:
         error_tracker.append(f'ERROR Invalid use of variable')
         VALID = False
         break
-    if 'hlt' in line_comps:
+    if 'hlt' in line_comp:
         HLT_COUNT += 1
     
     LINE_COUNT+=1
