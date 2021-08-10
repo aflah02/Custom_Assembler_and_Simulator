@@ -116,27 +116,27 @@ for line in ls_inputs:
         error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comp[0]}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[line_comp[0]]} arguments including the instruction')
         VALID = False
         break
-    if lineTypesMatch(line_comp) == -1:
+    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -1:
         error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]]]}')
         VALID = False
         break
-    if lineTypesMatch(line_comp) == -2:
+    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -2:
         error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]]]}')
         VALID = False
         break
-    if lineTypesMatch(line_comp) == -3:
+    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -3:
         error_tracker.append(f'ERROR (Invalid Immediate (Out of Range)): Kindly use Immediates between 0 and 255 (Inclusive of both Limits)')
         VALID = False
         break
-    if lineTypesMatch(line_comp) == -4:
+    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -4:
         error_tracker.append(f'ERROR Invalid use of FLAGS register')
         VALID = False
         break
-    if lineTypesMatch(line_comp) == -5 or lineTypesMatch(line_comp) == -8:
+    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -5 or lineTypesMatch(line_comp,lbl_declared,var_declared) == -8:
         error_tracker.append(f'ERROR Invalid use of label')
         VALID = False
         break
-    if lineTypesMatch(line_comp) == -6 or lineTypesMatch(line_comp) == -7:
+    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -6 or lineTypesMatch(line_comp,lbl_declared,var_declared) == -7:
         error_tracker.append(f'ERROR Invalid use of variable')
         VALID = False
         break
