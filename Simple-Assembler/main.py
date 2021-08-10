@@ -6,9 +6,9 @@ from sys import stdin
 
 ls_inputs = []
 for input_line in stdin:
-    if input_line == '':
+    if input_line == '\n':
         break
-    ls_inputs.append(input_line)
+    ls_inputs.append(input_line[:-1])
 
 VALID = True
 HLT_COUNT = 0
@@ -156,4 +156,3 @@ if HLT_COUNT > 1:
 if HLT_COUNT == 1 and ls_inputs[-1] != 'hlt':
     error_tracker.append(f'ERROR (hlt): hlt not present as last instruction')
     VALID = False
-
