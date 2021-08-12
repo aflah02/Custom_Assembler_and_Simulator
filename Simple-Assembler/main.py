@@ -33,16 +33,16 @@ for line in ls_inputs:
     line_comp = list(map(str, line.split()))
     a = line_comp[0]
     b = len(line_comp)
-    lbl_inst = []
-    for i in range(1,b):
-        e = line_comp[i]
-        lbl_inst.append(e)
-    lbl_instf.append(lbl_inst)
     if a[-1::] == ":":
-        b = a[:-1:]
+        lbl_inst = []
+        for i in range(1,b):
+            e = line_comp[i]
+            lbl_inst.append(e)
+        lbl_instf.append(lbl_inst)
+        f = a[:-1:]
         c = LINE_COUNT2
-        d = (b,c)
-        lbl_declared2.append(b)
+        d = (f,c)
+        lbl_declared2.append(f)
         lbl_declared.append(d)
         
 
