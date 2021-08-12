@@ -17,7 +17,7 @@ def isVarValid(var_declared,var_called,alphanum,inst):
     len1 = len(var_declared)
     for i in var_declared:
         if i[1]!=1:
-            return -1
+            return (-1,i[1])
         if i[1]==1:
             a = i[0]
             b = len(a)
@@ -26,20 +26,19 @@ def isVarValid(var_declared,var_called,alphanum,inst):
                 if i in alphanum:
                     count+=1
             if count!=b:
-                return -2
+                return (-2,i[0])
     b2 = len(var_called)
     var2 = []
     for i in var_declared:
         var2.append(i[0])
     for i in var2:
         if i in inst2:
-            return -4
-    count2 = 0
+            return (-4,i)
+    
     for i in var_called:
-        if i in var2:
-            count2+=1
-    if count2!=b2:
-        return -3 
+        if i not in var2:
+            return (-3,i)
+            
     return 0 #no issues all variables declared and called are valid
 
 def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2): #add in main
