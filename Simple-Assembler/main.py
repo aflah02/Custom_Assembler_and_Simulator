@@ -50,7 +50,7 @@ for line in ls_inputs:
         d = (f,c)
         lbl_declared2.append(f)
         lbl_declared.append(d)
-     count_ls_1+=1  
+    count_ls_1+=1  
 count_ls_2 = 0
 for line in ls_inputs:
     line = line.strip()
@@ -109,7 +109,7 @@ if validvar[0] == -2:
     lenarr = len(var_declared2)
     index = 0
     for i in range(0,lenarr):
-        if var_declared2[i] == varvalid[1]:
+        if var_declared2[i] == validvar[1]:
             index = i
             break
     error_tracker.append(f'ERROR (Variable): Variable name incorrect for instruction {index}')
@@ -126,7 +126,7 @@ if validvar[0] == -4:
     lenarr = len(var_declared2)
     index = 0
     for i in range(0,lenarr):
-        if var_declared2[i] == varvalid[1]:
+        if var_declared2[i] == validvar[1]:
             index = i
             break
     error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction  for instruction {index}')
