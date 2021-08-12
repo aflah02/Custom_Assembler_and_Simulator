@@ -108,7 +108,6 @@ def isLineValid(line_comp):
         return -1
     if isSizeRight(line_comp[0], line_comp) == False:
         return -2
-    
     return 0
 
 
@@ -134,8 +133,7 @@ def lineTypesMatch(line_comp,lbl_declared2,var_declared2):
                         if line_comp[-1] in lbl_declared2: #illegal use
                             return -5
                         else:
-                            return -6
-                    
+                            return -6      
             if line_comp[0]=='jmp' or line_comp[0]=='jlt' or line_comp[0]=='jgt' or line_comp[0]=='je': 
                 if line_comp[-1] not in lbl_declared2:
                     if line_comp[-1] in var_declared2: #illegal use
