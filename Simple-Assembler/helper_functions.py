@@ -41,7 +41,7 @@ def isVarValid(var_declared,var_called,alphanum,inst):
         return -3 
     return 0 #no issues all variables declared and called are valid
 
-def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
+def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2): #add in main
     inst2 = inst.copy()
     inst2.append('var')
     l1 = len(lbl_declared)
@@ -60,7 +60,7 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
             return -1
         else:
             c = lbl_inst[count2]
-            if isLineValid(c)!=0 or lineTypesMatch(c)!=0:
+            if isLineValid(c)!=0 or lineTypesMatch(c,lbl_declared2,var_declared2)!=0:
                 return -2
         count2+=1
     count3 = 0
@@ -77,14 +77,14 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
         if i in inst2:
             return -4
     return 0
-def Duplication(lbl_declared,var_declared): #add in main
+def Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2): #add in main
     count = 0
     count2 = 0
     count3 = 0
     a = len(lbl_declared)
     b = len(var_declared)
-    for i in var_declared:
-        if i in lbl_declared:
+    for i in var_declared2:
+        if i in lbl_declared2:
             count+=1
     for i in range(0,a):
         a2 = lbl_declared[i][0]
@@ -114,7 +114,7 @@ def isLineValid(line_comp):
     return 0
 
 
-def lineTypesMatch(line_comp,lbl_declared,var_declared):
+def lineTypesMatch(line_comp,lbl_declared2,var_declared2):
     """Checks if the objects in the line match the objects which they were supposed to be i.e. registers
     are in place of registers in the syntax and so on"""
     ls_type_order = type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]
@@ -131,16 +131,16 @@ def lineTypesMatch(line_comp,lbl_declared,var_declared):
                 return -3
         if ls_type_order[i] == 'Memory Address': #start from here
             if line_comp[0]=='ld' or line_comp[0]=='st':
-                for elem in var_declared:
-                    if line_comp[-1] != elem[0]:
-                        if line_comp[-1] in lbl_declared: #illegal use
+                for elem in var_declared2:
+                    if line_comp[-1] not in var_declared2:
+                        if line_comp[-1] in lbl_declared2: #illegal use
                             return -5
                         else:
                             return -6
                     
             if line_comp[0]=='jmp' or line_comp[0]=='jlt' or line_comp[0]=='jgt' or line_comp[0]=='je': 
-                if line_comp[-1] not in lbl_declared:
-                    if line_comp[-1] in var_declared: #illegal use
+                if line_comp[-1] not in lbl_declared2:
+                    if line_comp[-1] in var_declared2: #illegal use
                         return -7
                     else:
                         return -8
