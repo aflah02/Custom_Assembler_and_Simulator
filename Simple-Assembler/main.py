@@ -22,6 +22,7 @@ LINE_COUNT3 = 1
 var_declared = []
 var_declared2 = []
 var_called = []
+var_called2 = []
 lbl_declared = []
 lbl_declared2 = []
 lbl_called = []
@@ -90,19 +91,39 @@ for line in ls_inputs:
             var_declared2.append(b)
             LINE_COUNT3-=1
     LINE_COUNT3+=1
-
-
-if isVarValid(var_declared,var_called,alphanum,ls_instructions2) == -1:
-    error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
+for i in var_called:
+    a = var_called[0]
+    var_called2.append(a)
+    
+validvar = isVarValid(var_declared,var_called,alphanum,ls_instructions2)
+if validvar[0] == -1:
+    error_tracker.append(f'ERROR (Variable): Illegal declaration of variables for instruction {validvar[1]}')
     VALID = False 
-if isVarValid(var_declared,var_called,alphanum,ls_instructions2) == -2:
-    error_tracker.append(f'ERROR (Variable): Variable name incorrect')
+if validvar[0] == -2:
+    lenarr = len(var_declared2)
+    index = 0
+    for i in range(0,lenarr):
+        if var_declared2[i] == varvalid[1]:
+            index = i
+            break
+    error_tracker.append(f'ERROR (Variable): Variable name incorrect for instruction {index}')
     VALID = False   
-if isVarValid(var_declared,var_called,alphanum,ls_instructions2) == -3:
-    error_tracker.append(f'ERROR (Variable): Variable called was never declared')
+if validvar[0] == -3:
+    index = 0
+    for i in range(0,len(var_called)):
+        if var_called[i][0]==validvar[1]:
+            index = var_called[i][1]
+            break
+    error_tracker.append(f'ERROR (Variable): Variable called was never declared for instruction {index}')
     VALID = False 
-if isVarValid(var_declared,var_called,alphanum,ls_instructions2) == -4:
-    error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction')
+if validvar[0] == -4:
+    lenarr = len(var_declared2)
+    index = 0
+    for i in range(0,lenarr):
+        if var_declared2[i] == varvalid[1]:
+            index = i
+            break
+    error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction  for instruction {index}')
     VALID = False
 
 if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -1:
