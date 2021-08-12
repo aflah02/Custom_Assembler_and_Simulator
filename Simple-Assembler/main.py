@@ -89,32 +89,32 @@ for line in ls_inputs:
     LINE_COUNT3+=1
 
 
-if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -1:
+if isVarValid(var_declared,var_called,alphanum,ls_instructions2) == -1:
     error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
     VALID = False 
-if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -2:
+if isVarValid(var_declared,var_called,alphanum,ls_instructions2) == -2:
     error_tracker.append(f'ERROR (Variable): Variable name incorrect')
     VALID = False   
-if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -3:
+if isVarValid(var_declared,var_called,alphanum,ls_instructions2) == -3:
     error_tracker.append(f'ERROR (Variable): Variable called was never declared')
     VALID = False 
-if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -4:
+if isVarValid(var_declared,var_called,alphanum,ls_instructions2) == -4:
     error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction')
     VALID = False
 
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,alphanum,lbl_declared2,var_declared2) == -1:
+if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -1:
     error_tracker.append(f'ERROR (Label): Invalid label name')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,alphanum,lbl_declared2,var_declared2) == -2:
+if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -2:
     error_tracker.append(f'ERROR (Label): Invalid label instruction')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,alphanum,lbl_declared2,var_declared2) == -3:
+if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -3:
     error_tracker.append(f'ERROR (Label): Invalid label called')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,alphanum,lbl_declared2,var_declared2) == -4:
+if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -4:
     error_tracker.append(f'ERROR (Label): Label name is the same as an instruction')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,alphanum,lbl_declared2,var_declared2) == -5:
+if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -5:
     error_tracker.append(f'ERROR (Label): Label instruction not given')
     VALID = False
 if Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)==-1:
