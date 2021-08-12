@@ -101,7 +101,7 @@ if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -3:
 if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -4:
     error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction')
     VALID = False
-    
+
 if isLabelValid(lbl_called,lbl_declared,lbl_inst,alphanum,lbl_declared2,var_declared2) == -1:
     error_tracker.append(f'ERROR (Label): Invalid label name')
     VALID = False

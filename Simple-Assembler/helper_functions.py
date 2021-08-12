@@ -34,6 +34,7 @@ def isVarValid(var_declared,var_called,alphanum,inst):
     for i in var2:
         if i in inst2:
             return -4
+    count2 = 0
     for i in var_called:
         if i in var2:
             count2+=1
