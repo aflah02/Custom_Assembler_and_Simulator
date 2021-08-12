@@ -4,11 +4,13 @@ from OPcode_table import *
 from register_and_type_constants import *
 from sys import stdin
 
+
 ls_inputs = []
 for input_line in stdin:
     if input_line == '\n':
         break
     ls_inputs.append(input_line[:-1])
+
 
 VALID = True
 HLT_COUNT = 0
@@ -21,6 +23,8 @@ var_called = []
 lbl_declared = []
 lbl_called = []
 lbl_instf = []
+
+
 for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
@@ -36,23 +40,36 @@ for line in ls_inputs:
         d = (b,c)
         lbl_declared.append(d)
         
+
 for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
-    a = line_comp[0]
-    if a[-1::] == ":":
+    first_entry_of_instruction = line_comp[0]
+    if first_entry_of_instruction[-1::] == ":":
         if line_comp[1]=='ld' or line_comp[1]=='st':
-            b = line_comp[-1]
-            var_called.append(b)
+            var_in_line = line_comp[-1]
+            var_called.append(var_in_line)
         if line_comp[1]=='jmp' or line_comp[1]=='jlt' or line_comp[1]=='jgt' or line_comp[1]=='je':
-            b = line_comp[-1]
-            lbl_called.append(b)
+            label_in_line = line_comp[-1]
+            lbl_called.append(label_in_line)
     if line_comp[0]=='ld' or line_comp[0]=='st':
-        b = line_comp[-1]
-        var_called.append(b)
+        var_in_line = line_comp[-1]
+        var_called.append(var_in_line)
     if line_comp[0]=='jmp' or line_comp[0]=='jlt' or line_comp[0]=='jgt' or line_comp[0]=='je': 
-        b = line_comp[-1]
-        lbl_called.append(b)
+        label_in_line = line_comp[-1]
+        lbl_called.append(label_in_line)
+
+
+for line in ls_inputs:
+    line = line.strip()
+    line_comp = list(map(str, line.split()))
+    if line_comp[0] == 'mov':
+        if line_comp[-1][0] == '$':
+            line_comp[0] = 'movi'
+        else:
+            line_comp[0] = 'movr'
+    line = ' '.join(line_comp)
+
 
 for line in ls_inputs:
     line = line.strip()
@@ -63,6 +80,8 @@ for line in ls_inputs:
             c = (b,LINE_COUNT3)
             var_declared.append(c)
     LINE_COUNT3+=1
+
+    
 if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -1:
     error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
     VALID = False 
