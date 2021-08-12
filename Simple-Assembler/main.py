@@ -61,7 +61,8 @@ for line in ls_inputs:
         lbl_called.append(label_in_line)
 
 
-for line in ls_inputs:
+for i in range(len(ls_inputs)):
+    line = ls_inputs[i]
     line = line.strip()
     line_comp = list(map(str, line.split()))
     if line_comp[0] == 'mov':
@@ -70,7 +71,7 @@ for line in ls_inputs:
         else:
             line_comp[0] = 'movr'
     line = ' '.join(line_comp)
-
+    ls_inputs[i] = line
 
 for line in ls_inputs:
     line = line.strip()
@@ -177,42 +178,28 @@ if HLT_COUNT == 1 and ls_inputs[-1] != 'hlt':
     error_tracker.append(f'ERROR (hlt): hlt not present as last instruction')
     VALID = False
 
-# if not error_tracker:
-#     """
-#     TODO: parse the outputs in the correct format, etc
-#     """
-#     var_c = 0
-#     for i in ls_inputs:
-#         res = ''
-#         if "var" in i:
-#             c+=1
-#         else:
-#             instr = i.split()
-#             opcode_curr = OPcode_table[instr[0]]
-#             opc, typ = opcode_curr[0], opcode_curr[1]
-#             res+=opc
-#             unused = type_to_unusedbits[typ]
-#             res+=unused
-# else:
-#     print(error_tracker[0])
-len_without_vars_and_labels = 0
-for inst in ls_inputs:
-    inst_comps = list(map(str, inst.strip().split()))
-    if (inst_comps[0][-1] == ':' or inst_comps[0] == 'var'):
-        continue
-    else:
-        len_without_vars_and_labels += 1
 
 if len(error_tracker) > 0:
     print(error_tracker[0])
 else:
+    len_without_vars_and_labels = 0
+    for inst in ls_inputs:
+        inst_comps = list(map(str, inst.strip().split()))
+        if (inst_comps[0][-1] == ':' or inst_comps[0] == 'var'):
+            continue
+        else:
+            len_without_vars_and_labels += 1
+
     ls_vars = []
     ls_labels = []
     for i, inst in enumerate(ls_inputs):
         if 'var' in inst:
             ls_vars.append([i, list(map(str, input().split()))[-1]])
-        if 'label' in inst:
+        if ':' in inst:
             ls_labels.append([i, list(map(str, input().split()))[0][:-1]])
+    no_of_vars = len(ls_vars)
+
+    for inst in ls_inputs:
         output_string = ''
         inst_comps = list(map(str, inst.strip().split()))
         if inst_comps[0][-1] == ':' or inst_comps[0] == 'var':
@@ -228,6 +215,12 @@ else:
             location = len_without_vars_and_labels
             for i in ls_vars:
                 if i[-1] == inst_comps[-1]:
-                    location + i[0]
-            output_string += var_memory_address_parser(location)
-
+                    location += i[0]
+            output_string += memory_address_parser(location)
+        if inst_type == 'E':
+            location = 0
+            for i in ls_labels:
+                if i[-1] == inst_comps[0][:-1]:
+                    location += i[0]-no_of_vars
+            output_string += memory_address_parser(location)
+        print(output_string)
