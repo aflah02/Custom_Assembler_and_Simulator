@@ -95,7 +95,7 @@ def Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2): #add in 
     for i in range(0,b):
         b2 = var_declared[i][0]
         for j in range(i+1,b):
-            if b2==var_declared[i][0]:
+            if b2==var_declared[j][0]:
                 count3+=1
     if count>0:
         return -1
