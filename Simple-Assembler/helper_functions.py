@@ -2,6 +2,7 @@ from general_consts import *
 from register_and_type_constants import *
 from validity_checker import *
 
+
 def getRegisterEncoding(register):
     """Returns Register Encoding"""
     return register_to_encoding[register]
@@ -10,6 +11,7 @@ def getRegisterEncoding(register):
 def getRegisterCount(type):
     """Returns Register Count"""
     return type_to_reg_no[type]
+
 
 def isVarValid(var_declared,var_called,alphanum,inst):
     inst2 = inst.copy()
@@ -40,6 +42,7 @@ def isVarValid(var_declared,var_called,alphanum,inst):
             return (-3,i)
             
     return (0,0) #no issues all variables declared and called are valid
+
 
 def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2): #add in main
     inst2 = inst.copy()
@@ -75,8 +78,9 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,va
         if i in inst2:
             return (-4,i)
     return (0,0)
+
+
 def Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2): #add in main
-    
     a = len(lbl_declared)
     b = len(var_declared)
     for i in var_declared2:
@@ -93,7 +97,8 @@ def Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2): #add in 
             if b2==var_declared[j][0]:
                 return (-3,var_declared[j][1])
     return (0,0)
-        
+
+
 def isLineValid(line_comp):
     """Checks if line is valid that is the instruction is valid and the size corresponds to the instruction"""
     if isInstructionValid(line_comp[0]) == False:
@@ -138,5 +143,4 @@ def lineTypesMatch(line_comp,lbl_declared2,var_declared2):
                 '''else:
                     if isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum)!=0:
                         return -9'''
-            
     return 0
