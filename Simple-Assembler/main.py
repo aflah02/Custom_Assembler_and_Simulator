@@ -225,6 +225,7 @@ for line in ls_inputs:
         break
     if 'hlt' in line_comp:
         a = line_comp[0]
+        b = line_comp[-1]
         if a[-1::]==":":
             HLT_COUNT = HLT_COUNT
         else:
