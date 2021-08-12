@@ -181,7 +181,7 @@ if duptuple[0]==-2:
 if duptuple[0]==-3:
     error_tracker.append(f'ERROR (Var): A variable was declared more than once for instruction {duptuple1}')
     VALID = False
-    
+ 
 for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
@@ -200,27 +200,27 @@ for line in ls_inputs:
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -1:
-        error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        error_tracker.append(f'ERROR (Invalid Register (No such Register Found) for instrcution {LINE_COUNT}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -2:
-        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $) for instrcution {LINE_COUNT}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -3:
-        error_tracker.append(f'ERROR (Invalid Immediate (Out of Range)): Kindly use Immediates between 0 and 255 (Inclusive of both Limits)')
+        error_tracker.append(f'ERROR (Invalid Immediate (Out of Range) for instrcution {LINE_COUNT}): Kindly use Immediates between 0 and 255 (Inclusive of both Limits) for instrcution {LINE_COUNT}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -4:
-        error_tracker.append(f'ERROR Invalid use of FLAGS register')
+        error_tracker.append(f'ERROR Invalid use of FLAGS register for instrcution {LINE_COUNT}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -5 or lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -8:
-        error_tracker.append(f'ERROR Invalid use of label')
+        error_tracker.append(f'ERROR Invalid use of label for instrcution {LINE_COUNT}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -6 or lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -7:
-        error_tracker.append(f'ERROR Invalid use of variable')
+        error_tracker.append(f'ERROR Invalid use of variable for instrcution {LINE_COUNT}')
         VALID = False
         break
     if 'hlt' in line_comp:
