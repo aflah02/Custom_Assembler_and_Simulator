@@ -88,6 +88,7 @@ for line in ls_inputs:
             c = (b,LINE_COUNT3)
             var_declared.append(c)
             var_declared2.append(b)
+            LINE_COUNT3-=1
     LINE_COUNT3+=1
 
 
