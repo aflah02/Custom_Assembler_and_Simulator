@@ -156,3 +156,22 @@ if HLT_COUNT > 1:
 if HLT_COUNT == 1 and ls_inputs[-1] != 'hlt':
     error_tracker.append(f'ERROR (hlt): hlt not present as last instruction')
     VALID = False
+
+if not error_tracker:
+    """
+    TODO: parse the outputs in the correct format, etc
+    """
+    var_c = 0
+    for i in ls_inputs:
+        res = ''
+        if "var" in i:
+            c+=1
+        else:
+            instr = i.split()
+            opcode_curr = OPcode_table[instr[0]]
+            opc, typ = opcode_curr[0], opcode_curr[1]
+            res+=opc
+            unused = type_to_unusedbits[typ]
+            res+=unused
+else:
+    print(error_tracker[0])
