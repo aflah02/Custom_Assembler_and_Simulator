@@ -224,7 +224,11 @@ for line in ls_inputs:
         VALID = False
         break
     if 'hlt' in line_comp:
-        HLT_COUNT += 1
+        a = line_comp[0]
+        if a[-1::]==":":
+            HLT_COUNT = HLT_COUNT
+        else:
+            HLT_COUNT += 1
     
     LINE_COUNT+=1
 
