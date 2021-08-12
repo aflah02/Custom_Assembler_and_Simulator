@@ -49,8 +49,8 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,va
     l2 = len(lbl_inst)
     if l1!=l2:
         return -5
+    count2 = 0
     for i in lbl_declared:
-        count2 = 0
         a = i[0]
         b = len(a)
         count = 0
