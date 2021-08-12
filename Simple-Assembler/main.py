@@ -41,8 +41,8 @@ for line in ls_inputs:
         b = a[:-1:]
         c = LINE_COUNT2
         d = (b,c)
-        lbl_declared.append(b)
-        lbl_declared2.append(d)
+        lbl_declared2.append(b)
+        lbl_declared.append(d)
         
 
 for line in ls_inputs:
@@ -84,8 +84,8 @@ for line in ls_inputs:
         if line_comp[0] == "var":
             b = line_comp[-1]
             c = (b,LINE_COUNT3)
-            var_declared2.append(c)
-            var_declared.append(b)
+            var_declared.append(c)
+            var_declared2.append(b)
     LINE_COUNT3+=1
 
 
