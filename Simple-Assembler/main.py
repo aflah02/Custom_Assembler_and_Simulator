@@ -109,7 +109,9 @@ if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -3
 if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -4:
     error_tracker.append(f'ERROR (Label): Label name is the same as an instruction')
     VALID = False
-
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -5:
+    error_tracker.append(f'ERROR (Label): Label instruction not given')
+    VALID = False
 if Duplication(lbl_declared,var_declared)==-1:
     error_tracker.append(f'ERROR (Label/Var): Label name is the same as a variable')
     VALID = False
@@ -130,31 +132,19 @@ for line in ls_inputs:
         LINE_COUNT-=1
         continue
     if isLineValid(line_comp) == -1:
-        if (line_comp[0] == 'movi' or line_comp[0] == 'movr'):
-            error_tracker.append(f'ERROR: No Such Instruction Found as mov')
-        else:
-            error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]}')
+        error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]}')
         VALID = False
         break
     if isLineValid(line_comp) == -2:
-        if (line_comp[0] == 'movi' or line_comp[0] == 'movr'):
-            error_tracker.append(f'ERROR: Wrong Syntax used for Instruction mov, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[line_comp[0]]} arguments including the instruction')
-        else:
-            error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comp[0]}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[line_comp[0]]} arguments including the instruction')
+        error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comp[0]}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[line_comp[0]]} arguments including the instruction')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared,var_declared) == -1:
-        if (line_comp[0] == 'movi' or line_comp[0] == 'movr'):
-            error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction mov, kindly use acceptable argument(s) only which in case of mov is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
-        else:
-            error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared,var_declared) == -2:
-        if (line_comp[0] == 'movi' or line_comp[0] == 'movr'):
-            error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction mov, kindly use acceptable argument(s) only which in case of mov is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
-        else:
-            error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared,var_declared) == -3:
