@@ -35,9 +35,9 @@ consterr = 0
 for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
-    a = line_comp[0]
+    first_entry_of_instruction = line_comp[0]
     b = len(line_comp)
-    if a[-1::] == ":":
+    if first_entry_of_instruction[-1::] == ":":
         lbl_inst = []
         for i in range(1,b):
             e = line_comp[i]
@@ -46,7 +46,7 @@ for line in ls_inputs:
             consterr = count_ls_1
         if len(lbl_inst)!=0:
             lbl_instf.append(lbl_inst)
-        f = a[:-1:]
+        f = first_entry_of_instruction[:-1:]
         c = LINE_COUNT2
         d = (f,c)
         lbl_declared2.append(f)
