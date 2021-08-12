@@ -22,11 +22,11 @@ def isRegisterValid(register):
 
 
 def isImmediateValid(immediate):
-    """Checks if instruction is valid"""
+    """Checks if immediate is valid"""
     if immediate[0] != '$':
         return False
     else:
-        return False
+        return True
 
 def isImmediateRangeValid(immediate):
     if int(immediate[1:]) >= 0 and int(immediate[1:]) <= 255:
