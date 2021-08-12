@@ -10,6 +10,8 @@ def immediate_parser(immediate):
     imm = int(immediate[1:])
     return '{0:08b}'.format(imm)
 
+def var_memory_address_parser(location):
+    return '{0:08b}'.format(location)
 
 def register_parser(register):
     return register_to_encoding[register]

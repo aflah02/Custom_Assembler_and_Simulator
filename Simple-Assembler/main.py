@@ -3,6 +3,7 @@ from helper_functions import *
 from OPcode_table import *
 from register_and_type_constants import *
 from sys import stdin
+from parsers import *
 
 
 ls_inputs = []
@@ -81,7 +82,7 @@ for line in ls_inputs:
             var_declared.append(c)
     LINE_COUNT3+=1
 
-    
+
 if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -1:
     error_tracker.append(f'ERROR (Variable): Illegal declaration of variables')
     VALID = False 
@@ -176,21 +177,57 @@ if HLT_COUNT == 1 and ls_inputs[-1] != 'hlt':
     error_tracker.append(f'ERROR (hlt): hlt not present as last instruction')
     VALID = False
 
-if not error_tracker:
-    """
-    TODO: parse the outputs in the correct format, etc
-    """
-    var_c = 0
-    for i in ls_inputs:
-        res = ''
-        if "var" in i:
-            c+=1
-        else:
-            instr = i.split()
-            opcode_curr = OPcode_table[instr[0]]
-            opc, typ = opcode_curr[0], opcode_curr[1]
-            res+=opc
-            unused = type_to_unusedbits[typ]
-            res+=unused
-else:
+# if not error_tracker:
+#     """
+#     TODO: parse the outputs in the correct format, etc
+#     """
+#     var_c = 0
+#     for i in ls_inputs:
+#         res = ''
+#         if "var" in i:
+#             c+=1
+#         else:
+#             instr = i.split()
+#             opcode_curr = OPcode_table[instr[0]]
+#             opc, typ = opcode_curr[0], opcode_curr[1]
+#             res+=opc
+#             unused = type_to_unusedbits[typ]
+#             res+=unused
+# else:
+#     print(error_tracker[0])
+len_without_vars_and_labels = 0
+for inst in ls_inputs:
+    inst_comps = list(map(str, inst.strip().split()))
+    if (inst_comps[0][-1] == ':' or inst_comps[0] == 'var'):
+        continue
+    else:
+        len_without_vars_and_labels += 1
+
+if len(error_tracker) > 0:
     print(error_tracker[0])
+else:
+    ls_vars = []
+    ls_labels = []
+    for i, inst in enumerate(ls_inputs):
+        if 'var' in inst:
+            ls_vars.append([i, list(map(str, input().split()))[-1]])
+        if 'label' in inst:
+            ls_labels.append([i, list(map(str, input().split()))[0][:-1]])
+        output_string = ''
+        inst_comps = list(map(str, inst.strip().split()))
+        if inst_comps[0][-1] == ':' or inst_comps[0] == 'var':
+            continue
+        inst_type = OPcode_table[inst_comps[0]][-1]
+        output_string += opcode_parser(inst_comps[0])
+        output_string += '0' * type_to_unusedbits[inst_type]
+        for i in range(type_to_reg_no[inst_type]):
+            output_string += register_parser(inst_comps[i+1])
+        if inst_type == 'B':
+            output_string += immediate_parser(inst_comps[-1])
+        if inst_type == 'D':
+            location = len_without_vars_and_labels
+            for i in ls_vars:
+                if i[-1] == inst_comps[-1]:
+                    location + i[0]
+            output_string += var_memory_address_parser(location)
+
