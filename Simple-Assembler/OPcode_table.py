@@ -1,3 +1,4 @@
+"""Dictionary to lookup OPCODE and instruction type for any given instruction"""
 OPcode_table = {
     'add':["00000","A"],
     'sub':["00001","A"],
