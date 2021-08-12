@@ -20,8 +20,10 @@ LINE_COUNT = 1
 LINE_COUNT2 = 1
 LINE_COUNT3 = 1
 var_declared = []
+var_declared2 = []
 var_called = []
 lbl_declared = []
+lbl_declared2 = []
 lbl_called = []
 lbl_instf = []
 
@@ -39,7 +41,8 @@ for line in ls_inputs:
         b = a[:-1:]
         c = LINE_COUNT2
         d = (b,c)
-        lbl_declared.append(d)
+        lbl_declared1.append(b)
+        lbl_declared2.append(d)
         
 
 for line in ls_inputs:
@@ -80,7 +83,8 @@ for line in ls_inputs:
         if line_comp[0] == "var":
             b = line_comp[-1]
             c = (b,LINE_COUNT3)
-            var_declared.append(c)
+            var_declared2.append(c)
+            var_declared.append(b)
     LINE_COUNT3+=1
 
 
