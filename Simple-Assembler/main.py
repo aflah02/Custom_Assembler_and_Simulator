@@ -229,7 +229,7 @@ else:
         if inst_type == 'E':
             location = 0
             for i in ls_labels:
-                if i[-1] == inst_comps[0][:-1]:
-                    location += i[0]-no_of_vars
+                if i[-1] == inst_comps[1]:
+                    location += i[0] - no_of_vars
             output_string += memory_address_parser(location)
         print(output_string)
