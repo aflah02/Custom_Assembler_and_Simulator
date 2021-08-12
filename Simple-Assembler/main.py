@@ -194,9 +194,9 @@ else:
     ls_labels = []
     for i, inst in enumerate(ls_inputs):
         if 'var' in inst:
-            ls_vars.append([i, list(map(str, input().split()))[-1]])
+            ls_vars.append([i, list(map(str, inst.split()))[-1]])
         if ':' in inst:
-            ls_labels.append([i, list(map(str, input().split()))[0][:-1]])
+            ls_labels.append([i, list(map(str, inst.split()))[0][:-1]])
     no_of_vars = len(ls_vars)
 
     for inst in ls_inputs:
