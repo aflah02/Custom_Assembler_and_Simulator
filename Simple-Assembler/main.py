@@ -197,7 +197,7 @@ for line in ls_inputs:
         VALID = False
         break
     if isLineValid(line_comp) == -2:
-        error_tracker.append(f'ERROR: Wrong Syntax used for at line number {LINE_COUNT+1}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
+        error_tracker.append(f'ERROR: Wrong Syntax used at line number {LINE_COUNT+1}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -1:
