@@ -102,28 +102,28 @@ if isVarValid(var_declared,var_called,alphanum,ls_instructions) == -4:
     error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction')
     VALID = False
     
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -1:
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2) == -1:
     error_tracker.append(f'ERROR (Label): Invalid label name')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -2:
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2) == -2:
     error_tracker.append(f'ERROR (Label): Invalid label instruction')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -3:
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2) == -3:
     error_tracker.append(f'ERROR (Label): Invalid label called')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -4:
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2) == -4:
     error_tracker.append(f'ERROR (Label): Label name is the same as an instruction')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_inst,ls_instructions,alphanum) == -5:
+if isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2) == -5:
     error_tracker.append(f'ERROR (Label): Label instruction not given')
     VALID = False
-if Duplication(lbl_declared,var_declared)==-1:
+if Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)==-1:
     error_tracker.append(f'ERROR (Label/Var): Label name is the same as a variable')
     VALID = False
-if Duplication(lbl_declared,var_declared)==-2:
+if Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)==-2:
     error_tracker.append(f'ERROR (Label): A label was declared more than once')
     VALID = False
-if Duplication(lbl_declared,var_declared)==-3:
+if Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)==-3:
     error_tracker.append(f'ERROR (Var): A variable was declared more than once')
     VALID = False
     
@@ -144,27 +144,27 @@ for line in ls_inputs:
         error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comp[0]}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
         VALID = False
         break
-    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -1:
+    if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -1:
         error_tracker.append(f'ERROR (Invalid Register (No such Register Found)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
-    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -2:
+    if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -2:
         error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $)): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
-    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -3:
+    if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -3:
         error_tracker.append(f'ERROR (Invalid Immediate (Out of Range)): Kindly use Immediates between 0 and 255 (Inclusive of both Limits)')
         VALID = False
         break
-    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -4:
+    if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -4:
         error_tracker.append(f'ERROR Invalid use of FLAGS register')
         VALID = False
         break
-    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -5 or lineTypesMatch(line_comp,lbl_declared,var_declared) == -8:
+    if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -5 or lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -8:
         error_tracker.append(f'ERROR Invalid use of label')
         VALID = False
         break
-    if lineTypesMatch(line_comp,lbl_declared,var_declared) == -6 or lineTypesMatch(line_comp,lbl_declared,var_declared) == -7:
+    if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -6 or lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -7:
         error_tracker.append(f'ERROR Invalid use of variable')
         VALID = False
         break
