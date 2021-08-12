@@ -29,6 +29,7 @@ def isVarValid(var_declared,var_called,alphanum,inst):
                 return -2
     b2 = len(var_called)
     var2 = []
+    count2 = 0
     for i in var_declared:
         var2.append(i[0])
     for i in var2:
