@@ -225,9 +225,9 @@ for line in ls_inputs:
         VALID = False
         break
     if 'hlt' in line_comp:
-        a = line_comp[0]
-        b = line_comp[-1]
-        if a[-1::]==":":
+        first_entry_of_instruction = line_comp[0]
+        last_entry_of_instruction = line_comp[-1]
+        if first_entry_of_instruction[-1::]==":":
             HLT_COUNT = HLT_COUNT
         else:
             HLT_COUNT += 1
