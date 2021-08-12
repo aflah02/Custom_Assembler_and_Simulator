@@ -38,7 +38,8 @@ for line in ls_inputs:
         for i in range(1,b):
             e = line_comp[i]
             lbl_inst.append(e)
-        lbl_instf.append(lbl_inst)
+        if len(lbl_inst)!=0:
+            lbl_instf.append(lbl_inst)
         f = a[:-1:]
         c = LINE_COUNT2
         d = (f,c)
