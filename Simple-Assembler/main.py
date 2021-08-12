@@ -36,21 +36,21 @@ for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
     first_entry_of_instruction = line_comp[0]
-    b = len(line_comp)
+    no_of_line_comp = len(line_comp)
     if first_entry_of_instruction[-1::] == ":":
         lbl_inst = []
-        for i in range(1,b):
-            e = line_comp[i]
-            lbl_inst.append(e)
+        for i in range(1,no_of_line_comp):
+            element_of_line_comp = line_comp[i]
+            lbl_inst.append(element_of_line_comp)
         if len(lbl_inst)==0:
             consterr = count_ls_1
         if len(lbl_inst)!=0:
             lbl_instf.append(lbl_inst)
-        f = first_entry_of_instruction[:-1:]
-        c = LINE_COUNT2
-        d = (f,c)
-        lbl_declared2.append(f)
-        lbl_declared.append(d)
+        label_name = first_entry_of_instruction[:-1:]
+        line_no = LINE_COUNT2
+        label_name_and_line_tuple = (label_name,line_no)
+        lbl_declared2.append(label_name)
+        lbl_declared.append(label_name_and_line_tuple)
     count_ls_1+=1  
 count_ls_2 = 0
 for line in ls_inputs:
