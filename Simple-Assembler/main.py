@@ -7,11 +7,12 @@ from parsers import *
 
 
 ls_inputs = []
-for input_line in stdin:
-    if input_line == '\n':
+while True:
+    try:
+        input_line = input()
+        ls_inputs.append(input_line)
+    except EOFError:
         break
-    ls_inputs.append(input_line[:-1])
-
 
 VALID = True
 HLT_COUNT = 0
