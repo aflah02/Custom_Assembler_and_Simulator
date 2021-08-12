@@ -179,7 +179,7 @@ if duptuple[0]==-2:
     error_tracker.append(f'ERROR (Label): A label was declared more than once for instruction {index}')
     VALID = False
 if duptuple[0]==-3:
-    error_tracker.append(f'ERROR (Var): A variable was declared more than once for instruction {duptuple1}')
+    error_tracker.append(f'ERROR (Var): A variable was declared more than once for instruction {duptuple[1]}')
     VALID = False
  
 for line in ls_inputs:
@@ -192,11 +192,11 @@ for line in ls_inputs:
         LINE_COUNT-=1
         continue
     if isLineValid(line_comp) == -1:
-        error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]}')
+        error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]} for instrcution {LINE_COUNT}')
         VALID = False
         break
     if isLineValid(line_comp) == -2:
-        error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comp[0]}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
+        error_tracker.append(f'ERROR: Wrong Syntax used for instrcution {LINE_COUNT}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -1:
