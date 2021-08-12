@@ -103,7 +103,7 @@ for i in var_called:
     
 validvar = isVarValid(var_declared,var_called,alphanum,ls_instructions2)
 if validvar[0] == -1:
-    error_tracker.append(f'ERROR (Variable): Illegal declaration of variables for instruction {validvar[1]}')
+    error_tracker.append(f'ERROR (Variable): Illegal declaration of variables for instruction {validvar[1]+1}')
     VALID = False 
 if validvar[0] == -2:
     lenarr = len(var_declared2)
@@ -112,7 +112,7 @@ if validvar[0] == -2:
         if var_declared2[i] == validvar[1]:
             index = i
             break
-    error_tracker.append(f'ERROR (Variable): Variable name incorrect for instruction {index}')
+    error_tracker.append(f'ERROR (Variable): Variable name incorrect for instruction {index+1}')
     VALID = False   
 if validvar[0] == -3:
     index = 0
@@ -120,7 +120,7 @@ if validvar[0] == -3:
         if var_called[i][0]==validvar[1]:
             index = var_called[i][1]
             break
-    error_tracker.append(f'ERROR (Variable): Variable called was never declared for instruction {index}')
+    error_tracker.append(f'ERROR (Variable): Variable called was never declared for instruction {index+1}')
     VALID = False 
 if validvar[0] == -4:
     lenarr = len(var_declared2)
@@ -129,15 +129,15 @@ if validvar[0] == -4:
         if var_declared2[i] == validvar[1]:
             index = i
             break
-    error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction  for instruction {index}')
+    error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction  for instruction {index+1}')
     VALID = False
     
 validlbl = isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2)
 if validlbl[0] == -1:
-    error_tracker.append(f'ERROR (Label): Invalid label name for instruction {validlbl[1]}')
+    error_tracker.append(f'ERROR (Label): Invalid label name for instruction {validlbl[1]+1}')
     VALID = False
 if validlbl[0] == -2:
-    error_tracker.append(f'ERROR (Label): Invalid label instruction for instruction {validlbl[1]}')
+    error_tracker.append(f'ERROR (Label): Invalid label instruction for instruction {validlbl[1]+1}')
     VALID = False
 if validlbl[0] == -3:
     lenarr = len(lbl_called2)
@@ -145,18 +145,18 @@ if validlbl[0] == -3:
     for i in range(0,lenarr):
         if lbl_called2[i][0]==validlbl[1]:
             index = lbl_called2[i][1]
-    error_tracker.append(f'ERROR (Label): Invalid label called for instruction {index}')
+    error_tracker.append(f'ERROR (Label): Invalid label called for instruction {index+1}')
     VALID = False
 if validlbl[0] == -4:
     lenarr = len(lbl_declared)
     index = 0
     for i in range(0,lenarr):
         if lbl_declared[i][0]==validlbl[1]:
-            index = lbl_declared[i][1]
-    error_tracker.append(f'ERROR (Label): Label name is the same as an instruction for instruction {index}')
+            index = lbl_declared[i][1] 
+    error_tracker.append(f'ERROR (Label): Label name is the same as an instruction for instruction {index+1}')
     VALID = False
 if validlbl[0] == -5:
-    error_tracker.append(f'ERROR (Label): Label instruction not given for instruction {consterr}')
+    error_tracker.append(f'ERROR (Label): Label instruction not given for instruction {consterr+1}')
     VALID = False
     
 duptuple = Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)
@@ -167,7 +167,7 @@ if duptuple[0]==-1:
         if var_declared2[i] == duptuple[1]:
             index = i
             break
-    error_tracker.append(f'ERROR (Label/Var): Label name is the same as a variable for instruction {index}')
+    error_tracker.append(f'ERROR (Label/Var): Label name is the same as a variable for instruction {index+1}')
     VALID = False
 if duptuple[0]==-2:
     lenarr = len(lbl_declared2)
@@ -176,10 +176,10 @@ if duptuple[0]==-2:
         if lbl_declared[i][0] == duptuple[1]:
             index = lbl_declared[i][1]
             break
-    error_tracker.append(f'ERROR (Label): A label was declared more than once for instruction {index}')
+    error_tracker.append(f'ERROR (Label): A label was declared more than once for instruction {index+1}')
     VALID = False
 if duptuple[0]==-3:
-    error_tracker.append(f'ERROR (Var): A variable was declared more than once for instruction {duptuple[1]}')
+    error_tracker.append(f'ERROR (Var): A variable was declared more than once for instruction {duptuple[1]+1}')
     VALID = False
  
 for line in ls_inputs:
@@ -192,35 +192,35 @@ for line in ls_inputs:
         LINE_COUNT-=1
         continue
     if isLineValid(line_comp) == -1:
-        error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]} for instrcution {LINE_COUNT}')
+        error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]} for instrcution {LINE_COUNT+1}')
         VALID = False
         break
     if isLineValid(line_comp) == -2:
-        error_tracker.append(f'ERROR: Wrong Syntax used for instrcution {LINE_COUNT}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
+        error_tracker.append(f'ERROR: Wrong Syntax used for instrcution {LINE_COUNT+1}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -1:
-        error_tracker.append(f'ERROR (Invalid Register (No such Register Found) for instrcution {LINE_COUNT}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        error_tracker.append(f'ERROR (Invalid Register (No such Register Found) for instruction {LINE_COUNT+1}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -2:
-        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $) for instrcution {LINE_COUNT}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $) for instrcution {LINE_COUNT+1}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -3:
-        error_tracker.append(f'ERROR (Invalid Immediate (Out of Range) for instrcution {LINE_COUNT}): Kindly use Immediates between 0 and 255 (Inclusive of both Limits) for instrcution {LINE_COUNT}')
+        error_tracker.append(f'ERROR (Invalid Immediate (Out of Range) for instrcution {LINE_COUNT+1}): Kindly use Immediates between 0 and 255 (Inclusive of both Limits) for instrcution {LINE_COUNT}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -4:
-        error_tracker.append(f'ERROR Invalid use of FLAGS register for instrcution {LINE_COUNT}')
+        error_tracker.append(f'ERROR Invalid use of FLAGS register for instrcution {LINE_COUNT+1}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -5 or lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -8:
-        error_tracker.append(f'ERROR Invalid use of label for instrcution {LINE_COUNT}')
+        error_tracker.append(f'ERROR Invalid use of label for instrcution {LINE_COUNT+1}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -6 or lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -7:
-        error_tracker.append(f'ERROR Invalid use of variable for instrcution {LINE_COUNT}')
+        error_tracker.append(f'ERROR Invalid use of variable for instrcution {LINE_COUNT+1}')
         VALID = False
         break
     if 'hlt' in line_comp:
