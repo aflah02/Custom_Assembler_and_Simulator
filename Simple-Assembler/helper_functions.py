@@ -39,7 +39,7 @@ def isVarValid(var_declared,var_called,alphanum,inst):
         if i not in var2:
             return (-3,i)
             
-    return 0 #no issues all variables declared and called are valid
+    return (0,0) #no issues all variables declared and called are valid
 
 def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2): #add in main
     inst2 = inst.copy()
@@ -47,7 +47,7 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,va
     l1 = len(lbl_declared)
     l2 = len(lbl_inst)
     if l1!=l2:
-        return -5
+        return (-5,0)
     count2 = 0
     for i in lbl_declared:
         a = i[0]
@@ -57,11 +57,11 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,va
             if j in alphanum:
                 count+=1
         if count!=b:
-            return -1
+            return (-1,i[1])
         else:
             c = lbl_inst[count2]
             if isLineValid(c)!=0 or lineTypesMatch(c,lbl_declared2,var_declared2)!=0:
-                return -2
+                return (-2,i[1])
         count2+=1
     count3 = 0
     b2 = len(lbl_called)
@@ -69,40 +69,30 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,va
     for i in lbl_declared:
         lbl2.append(i[0])
     for i in lbl_called:
-        if i in lbl2:
-            count3+=1
-    if count3!=b2:
-        return -3 
+        if i not in lbl2:
+            return (-3,i)     
     for i in lbl2:
         if i in inst2:
-            return -4
-    return 0
+            return (-4,i)
+    return (0,0)
 def Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2): #add in main
-    count = 0
-    count2 = 0
-    count3 = 0
+    
     a = len(lbl_declared)
     b = len(var_declared)
     for i in var_declared2:
         if i in lbl_declared2:
-            count+=1
+            return (-1,i)
     for i in range(0,a):
         a2 = lbl_declared[i][0]
         for j in range(i+1,a):
             if a2==lbl_declared[j][0]:
-                count2+=1
+                return (-2,a2)
     for i in range(0,b):
         b2 = var_declared[i][0]
         for j in range(i+1,b):
             if b2==var_declared[j][0]:
-                count3+=1
-    if count>0:
-        return -1
-    if count2>0:
-        return -2
-    if count3>0:
-        return -3
-    return 0
+                return (-3,var_declared[j][1])
+    return (0,0)
         
 def isLineValid(line_comp):
     """Checks if line is valid that is the instruction is valid and the size corresponds to the instruction"""
