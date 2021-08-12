@@ -14,6 +14,7 @@ def getRegisterCount(type):
 
 
 def isVarValid(var_declared,var_called,alphanum,inst):
+    """Checks if Variables are Valid"""
     inst2 = inst.copy()
     inst2.append('var')
     len1 = len(var_declared)
@@ -45,6 +46,7 @@ def isVarValid(var_declared,var_called,alphanum,inst):
 
 
 def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2): #add in main
+    """Checks if Labels are Valid"""
     inst2 = inst.copy()
     inst2.append('var')
     l1 = len(lbl_declared)
@@ -81,6 +83,7 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,va
 
 
 def Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2): #add in main
+    """Checks if there are any Duplicate Labels or Variables"""
     a = len(lbl_declared)
     b = len(var_declared)
     for i in var_declared2:
