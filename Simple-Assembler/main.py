@@ -208,11 +208,13 @@ else:
             ls_labels.append([i, list(map(str, inst.split()))[0][:-1]])
     no_of_vars = len(ls_vars)
 
-    for inst in ls_inputs:
+    for i in range(len(ls_inputs)):
         output_string = ''
-        inst_comps = list(map(str, inst.strip().split()))
-        if inst_comps[0][-1] == ':' or inst_comps[0] == 'var':
+        inst_comps = list(map(str, ls_inputs[i].strip().split()))
+        if inst_comps[0] == 'var':
             continue
+        if inst_comps[0][-1] == ":":
+            inst_comps = inst_comps[1:]
         inst_type = OPcode_table[inst_comps[0]][-1]
         output_string += opcode_parser(inst_comps[0])
         output_string += '0' * type_to_unusedbits[inst_type]

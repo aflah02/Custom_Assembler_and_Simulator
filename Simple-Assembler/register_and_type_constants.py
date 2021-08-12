@@ -59,7 +59,7 @@ type_to_memoryaddress = {
 register_to_encoding tells us the encoding of a register
 '''
 register_to_encoding = {
-    'RO': '000',
+    'R0': '000',
     'R1': '001',
     'R2': '010',
     'R3': '011',
