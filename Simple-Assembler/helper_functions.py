@@ -44,6 +44,10 @@ def isVarValid(var_declared,var_called,alphanum,inst):
 def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
     inst2 = inst.copy()
     inst2.append('var')
+    l1 = len(lbl_declared)
+    l2 = len(lbl_inst)
+    if l1!=l2:
+        return -5
     for i in lbl_declared:
         count2 = 0
         a = i[0]
