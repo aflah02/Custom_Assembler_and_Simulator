@@ -14,6 +14,7 @@ def getRegisterCount(type):
 def isVarValid(var_declared,var_called,alphanum,inst):
     inst2 = inst.copy()
     inst2.append('var')
+    len1 = len(var_declared)
     for i in var_declared:
         if i[1]!=1:
             return -1
@@ -26,7 +27,6 @@ def isVarValid(var_declared,var_called,alphanum,inst):
                     count+=1
             if count!=b:
                 return -2
-    count2 = 0
     b2 = len(var_called)
     var2 = []
     for i in var_declared:
