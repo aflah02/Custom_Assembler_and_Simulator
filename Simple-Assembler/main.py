@@ -26,9 +26,11 @@ var_called2 = []
 lbl_declared = []
 lbl_declared2 = []
 lbl_called = []
+lbl_called2 = []
 lbl_instf = []
 
-
+count_ls_1 = 0
+consterr = 0
 for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
@@ -39,6 +41,8 @@ for line in ls_inputs:
         for i in range(1,b):
             e = line_comp[i]
             lbl_inst.append(e)
+        if len(lbl_inst)==0:
+            consterr = count_ls_1
         if len(lbl_inst)!=0:
             lbl_instf.append(lbl_inst)
         f = a[:-1:]
@@ -46,8 +50,8 @@ for line in ls_inputs:
         d = (f,c)
         lbl_declared2.append(f)
         lbl_declared.append(d)
-        
-
+     count_ls_1+=1  
+count_ls_2 = 0
 for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
@@ -60,13 +64,15 @@ for line in ls_inputs:
             if line_comp[1]=='jmp' or line_comp[1]=='jlt' or line_comp[1]=='jgt' or line_comp[1]=='je':
                 label_in_line = line_comp[-1]
                 lbl_called.append(label_in_line)
+                lbl_called2.append([label_in_line,count_ls_2])
     if line_comp[0]=='ld' or line_comp[0]=='st':
         var_in_line = line_comp[-1]
         var_called.append(var_in_line)
     if line_comp[0]=='jmp' or line_comp[0]=='jlt' or line_comp[0]=='jgt' or line_comp[0]=='je': 
         label_in_line = line_comp[-1]
         lbl_called.append(label_in_line)
-
+        lbl_called2.append([label_in_line,count_ls_2])
+    count_ls_2+=1
 
 for i in range(len(ls_inputs)):
     line = ls_inputs[i]
@@ -125,30 +131,55 @@ if validvar[0] == -4:
             break
     error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction  for instruction {index}')
     VALID = False
-
-if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -1:
-    error_tracker.append(f'ERROR (Label): Invalid label name')
+    
+validlbl = isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2)
+if validlbl[0] == -1:
+    error_tracker.append(f'ERROR (Label): Invalid label name for instruction {validlbl[1]}')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -2:
-    error_tracker.append(f'ERROR (Label): Invalid label instruction')
+if validlbl[0] == -2:
+    error_tracker.append(f'ERROR (Label): Invalid label instruction for instruction {validlbl[1]}')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -3:
-    error_tracker.append(f'ERROR (Label): Invalid label called')
+if validlbl[0] == -3:
+    lenarr = len(lbl_called2)
+    index = 0
+    for i in range(0,lenarr):
+        if lbl_called2[i][0]==validlbl[1]:
+            index = lbl_called2[i][1]
+    error_tracker.append(f'ERROR (Label): Invalid label called for instruction {index}')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -4:
-    error_tracker.append(f'ERROR (Label): Label name is the same as an instruction')
+if validlbl[0] == -4:
+    lenarr = len(lbl_declared)
+    index = 0
+    for i in range(0,lenarr):
+        if lbl_declared[i][0]==validlbl[1]:
+            index = lbl_declared[i][1]
+    error_tracker.append(f'ERROR (Label): Label name is the same as an instruction for instruction {index}')
     VALID = False
-if isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2) == -5:
-    error_tracker.append(f'ERROR (Label): Label instruction not given')
+if validlbl[0] == -5:
+    error_tracker.append(f'ERROR (Label): Label instruction not given for instruction {consterr}')
     VALID = False
-if Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)==-1:
-    error_tracker.append(f'ERROR (Label/Var): Label name is the same as a variable')
+    
+duptuple = Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)
+if duptuple[0]==-1:
+    lenarr = len(var_declared2)
+    index = 0
+    for i in range(0,lenarr):
+        if var_declared2[i] == duptuple[1]:
+            index = i
+            break
+    error_tracker.append(f'ERROR (Label/Var): Label name is the same as a variable for instruction {index}')
     VALID = False
-if Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)==-2:
-    error_tracker.append(f'ERROR (Label): A label was declared more than once')
+if duptuple[0]==-2:
+    lenarr = len(lbl_declared2)
+    index = 0
+    for i in range(0,lenarr):
+        if lbl_declared[i][0] == duptuple[1]:
+            index = lbl_declared[i][1]
+            break
+    error_tracker.append(f'ERROR (Label): A label was declared more than once for instruction {index}')
     VALID = False
-if Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)==-3:
-    error_tracker.append(f'ERROR (Var): A variable was declared more than once')
+if duptuple[0]==-3:
+    error_tracker.append(f'ERROR (Var): A variable was declared more than once for instruction {duptuple1}')
     VALID = False
     
 for line in ls_inputs:
