@@ -41,7 +41,7 @@ for line in ls_inputs:
         b = a[:-1:]
         c = LINE_COUNT2
         d = (b,c)
-        lbl_declared1.append(b)
+        lbl_declared.append(b)
         lbl_declared2.append(d)
         
 
@@ -50,12 +50,13 @@ for line in ls_inputs:
     line_comp = list(map(str, line.split()))
     first_entry_of_instruction = line_comp[0]
     if first_entry_of_instruction[-1::] == ":":
-        if line_comp[1]=='ld' or line_comp[1]=='st':
-            var_in_line = line_comp[-1]
-            var_called.append(var_in_line)
-        if line_comp[1]=='jmp' or line_comp[1]=='jlt' or line_comp[1]=='jgt' or line_comp[1]=='je':
-            label_in_line = line_comp[-1]
-            lbl_called.append(label_in_line)
+        if len(line_comp)>1:
+            if line_comp[1]=='ld' or line_comp[1]=='st':
+                var_in_line = line_comp[-1]
+                var_called.append(var_in_line)
+            if line_comp[1]=='jmp' or line_comp[1]=='jlt' or line_comp[1]=='jgt' or line_comp[1]=='je':
+                label_in_line = line_comp[-1]
+                lbl_called.append(label_in_line)
     if line_comp[0]=='ld' or line_comp[0]=='st':
         var_in_line = line_comp[-1]
         var_called.append(var_in_line)
@@ -140,7 +141,7 @@ for line in ls_inputs:
         VALID = False
         break
     if isLineValid(line_comp) == -2:
-        error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comp[0]}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[line_comp[0]]} arguments including the instruction')
+        error_tracker.append(f'ERROR: Wrong Syntax used for Instruction {line_comp[0]}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared,var_declared) == -1:

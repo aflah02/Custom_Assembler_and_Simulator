@@ -2,4 +2,4 @@
 
 # Add command to run your program here
 #echo "Hello World"
-python3 main.py
+python3 ./main.py
