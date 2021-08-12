@@ -35,7 +35,8 @@ for line in ls_inputs:
     b = len(line_comp)
     lbl_inst = []
     for i in range(1,b):
-        lbl_inst.append(i)
+        e = line_comp[i]
+        lbl_inst.append(e)
     lbl_instf.append(lbl_inst)
     if a[-1::] == ":":
         b = a[:-1:]
