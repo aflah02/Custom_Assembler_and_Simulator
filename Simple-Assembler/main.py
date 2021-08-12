@@ -197,31 +197,31 @@ for line in ls_inputs:
         VALID = False
         break
     if isLineValid(line_comp) == -2:
-        error_tracker.append(f'ERROR: Wrong Syntax used for instruction {LINE_COUNT+1}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
+        error_tracker.append(f'ERROR: Wrong Syntax used for at line number {LINE_COUNT+1}, please note it is a Type {OPcode_table[line_comp[0]]} which requires {type_to_input_len[OPcode_table[line_comp[0]][-1]]} arguments including the instruction')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -1:
-        error_tracker.append(f'ERROR (Invalid Register (No such Register Found) for instruction {LINE_COUNT+1}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        error_tracker.append(f'ERROR (Invalid Register (No such Register Found) at line number {LINE_COUNT+1}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only, which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -2:
-        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $) for instruction {LINE_COUNT+1}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $) at line number {LINE_COUNT+1}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only, which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -3:
-        error_tracker.append(f'ERROR (Invalid Immediate (Out of Range) for instruction {LINE_COUNT+1}): Kindly use Immediates between 0 and 255 (Inclusive of both Limits) for instrcution {LINE_COUNT}')
+        error_tracker.append(f'ERROR (Invalid Immediate (Out of Range) at line number {LINE_COUNT+1}): Kindly use Immediates between 0 and 255 (Inclusive of both Limits) for instruction {LINE_COUNT}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -4:
-        error_tracker.append(f'ERROR Invalid use of FLAGS register for instruction {LINE_COUNT+1}')
+        error_tracker.append(f'ERROR Invalid use of FLAGS register at line number {LINE_COUNT+1}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -5 or lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -8:
-        error_tracker.append(f'ERROR Invalid use of label for instruction {LINE_COUNT+1}')
+        error_tracker.append(f'ERROR Invalid use of label at line number {LINE_COUNT+1}')
         VALID = False
         break
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -6 or lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -7:
-        error_tracker.append(f'ERROR Invalid use of variable for instruction {LINE_COUNT+1}')
+        error_tracker.append(f'ERROR Invalid use of variable at line numberr {LINE_COUNT+1}')
         VALID = False
         break
     if 'hlt' in line_comp:
@@ -235,15 +235,15 @@ for line in ls_inputs:
     LINE_COUNT+=1
 
 if HLT_COUNT == 0:
-    error_tracker.append(f'ERROR (hlt) for instruction {LINE_COUNT+1}: No hlt instruction present')
+    error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: No hlt instruction present')
     VALID = False
 
 if HLT_COUNT > 1:
-    error_tracker.append(f'ERROR (hlt) for instruction {LINE_COUNT+1}: Multiple hlt instruction present')
+    error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: Multiple hlt instruction present')
     VALID = False
 
 if HLT_COUNT == 1 and ls_inputs[-1] != 'hlt':
-    error_tracker.append(f'ERROR (hlt) for instruction {LINE_COUNT+1}: hlt not present as last instruction')
+    error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: hlt not present as last instruction')
     VALID = False
 
 
