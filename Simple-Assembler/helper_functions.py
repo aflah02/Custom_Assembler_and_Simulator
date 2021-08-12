@@ -49,8 +49,8 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum): #add in main
         a = i[0]
         b = len(a)
         count = 0
-        for i in a:
-            if i in alphanum:
+        for j in a:
+            if j in alphanum:
                 count+=1
         if count!=b:
             return -1
