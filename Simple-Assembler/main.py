@@ -64,6 +64,7 @@ for line in ls_inputs:
             if line_comp[1]=='ld' or line_comp[1]=='st':
                 var_in_line = line_comp[-1]
                 var_called.append(var_in_line)
+                var_called2.append([var_in_line,count_ls_2])
             if line_comp[1]=='jmp' or line_comp[1]=='jlt' or line_comp[1]=='jgt' or line_comp[1]=='je':
                 label_in_line = line_comp[-1]
                 lbl_called.append(label_in_line)
@@ -71,6 +72,7 @@ for line in ls_inputs:
     if line_comp[0]=='ld' or line_comp[0]=='st':
         var_in_line = line_comp[-1]
         var_called.append(var_in_line)
+        var_called2.append([var_in_line,count_ls_2])
     if line_comp[0]=='jmp' or line_comp[0]=='jlt' or line_comp[0]=='jgt' or line_comp[0]=='je': 
         label_in_line = line_comp[-1]
         lbl_called.append(label_in_line)
@@ -100,9 +102,7 @@ for line in ls_inputs:
             var_declared2.append(b)
             LINE_COUNT3-=1
     LINE_COUNT3+=1
-for i in var_called:
-    a = var_called[0]
-    var_called2.append(a)
+
     
 validvar = isVarValid(var_declared,var_called,alphanum,ls_instructions2)
 
