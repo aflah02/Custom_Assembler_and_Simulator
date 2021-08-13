@@ -119,8 +119,8 @@ def lineTypesMatch(line_comp,lbl_declared2,var_declared2):
         if ls_type_order[i] == 'Register':
             if isRegisterValid(line_comp[i]) is False:
                 return -1
-            if isRegisterValid(line_comp[i])==-1:
-                if line_comp[0]!="mov":
+            if isRegisterValid(line_comp[-1])==-1:
+                if line_comp[0]!="movr":
                     return -4
         if ls_type_order[i] == 'Immediate':
             if isImmediateValid(line_comp[i]) is False:
