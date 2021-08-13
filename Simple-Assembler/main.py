@@ -203,6 +203,9 @@ for line in ls_inputs:
     a = line_comp[0]
 
     if a[-1::]==':':
+        b =line_comp[-1]
+        if b=='hlt':
+            HLT_COUNT+=1
         continue
 
     if line_comp[0]=="var":
@@ -248,7 +251,7 @@ for line in ls_inputs:
         error_tracker.append(f'ERROR Invalid use of variable at line numberr {LINE_COUNT+1}')
         VALID = False
         break
-
+    
     if 'hlt' in line_comp:
         HLT_COUNT += 1
     
