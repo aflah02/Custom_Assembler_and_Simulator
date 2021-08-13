@@ -17,7 +17,7 @@ while True:
 VALID = True
 HLT_COUNT = 0
 error_tracker = []
-LINE_COUNT = 1
+LINE_COUNT = 0
 LINE_COUNT2 = 1
 LINE_COUNT3 = 1
 var_declared = []
@@ -107,7 +107,7 @@ for i in var_called:
 validvar = isVarValid(var_declared,var_called,alphanum,ls_instructions2)
 
 if validvar[0] == -1:
-    error_tracker.append(f'ERROR (Variable): Illegal declaration of variables for instruction {validvar[1]+1}')
+    error_tracker.append(f'ERROR (Variable): Illegal declaration of variables for instruction {validvar[1]}')
     VALID = False 
 
 if validvar[0] == -2:
@@ -122,11 +122,11 @@ if validvar[0] == -2:
 
 if validvar[0] == -3:
     index = 0
-    for i in range(0,len(var_called)):
-        if var_called[i][0]==validvar[1]:
-            index = var_called[i][1]
+    for i in range(0,len(var_called2)):
+        if var_called2[i][0]==validvar[1]:
+            index = var_called2[i][1]
             break
-    error_tracker.append(f'ERROR (Variable): Variable called was never declared for instruction {index+1}')
+    error_tracker.append(f'ERROR (Variable): Variable called was never declared in instruction {index+1}')
     VALID = False 
 
 if validvar[0] == -4:
@@ -258,15 +258,15 @@ for line in ls_inputs:
     LINE_COUNT+=1
 
 if HLT_COUNT == 0:
-    error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: No hlt instruction present')
+    error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT}: No hlt instruction present')
     VALID = False
 
 if HLT_COUNT > 1:
-    error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: Multiple hlt instruction present')
+    error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT}: Multiple hlt instruction present')
     VALID = False
 checkdiv = list(map(str, ls_inputs[-1].split()))
 if HLT_COUNT == 1 and checkdiv[-1] != 'hlt':
-    error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: hlt not present as last instruction')
+    error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT}: hlt not present as last instruction')
     VALID = False
 if HLT_COUNT == 1 and checkdiv[-1] == 'hlt':
     a = checkdiv[0]
@@ -274,7 +274,7 @@ if HLT_COUNT == 1 and checkdiv[-1] == 'hlt':
     if b==":":
         c = a[:-1:]
         if c not in lbl_called:
-            error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: hlt not present as last instruction, label with hlt was never called')
+            error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT}: hlt not present as last instruction, label with hlt was never called')
             VALID = False
             
 if len(error_tracker) > 0:
