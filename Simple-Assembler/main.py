@@ -48,7 +48,7 @@ for line in ls_inputs:
         if len(lbl_inst)!=0:
             lbl_instf.append(lbl_inst)
         label_name = first_entry_of_instruction[:-1:]
-        line_no = LINE_COUNT2
+        line_no = count_ls_1
         label_name_and_line_tuple = (label_name,line_no)
         lbl_declared2.append(label_name)
         lbl_declared.append(label_name_and_line_tuple)
@@ -250,12 +250,7 @@ for line in ls_inputs:
         break
 
     if 'hlt' in line_comp:
-        first_entry_of_instruction = line_comp[0]
-        last_entry_of_instruction = line_comp[-1]
-        if first_entry_of_instruction[-1::]==":":
-            HLT_COUNT = HLT_COUNT
-        else:
-            HLT_COUNT += 1
+        HLT_COUNT += 1
     
     LINE_COUNT+=1
 
@@ -266,12 +261,19 @@ if HLT_COUNT == 0:
 if HLT_COUNT > 1:
     error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: Multiple hlt instruction present')
     VALID = False
-
-if HLT_COUNT == 1 and ls_inputs[-1] != 'hlt':
+checkdiv = list(map(str, ls_inputs[-1].split()))
+if HLT_COUNT == 1 and checkdiv[-1] != 'hlt':
     error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: hlt not present as last instruction')
     VALID = False
-
-
+if if HLT_COUNT == 1 and checkdiv[-1] == 'hlt':
+    a = checkdiv[0]
+    b = a[-1::]
+    if b==":":
+        c = a[:-1:]
+        if c not in lbl_called:
+            error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: hlt not present as last instruction, label with hlt was never called')
+            VALID = False
+            
 if len(error_tracker) > 0:
     print(error_tracker[0])
 else:
