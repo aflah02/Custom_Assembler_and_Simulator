@@ -101,7 +101,7 @@ def Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2): #add in 
                 return (-3,var_declared[j][1])
     return (0,0)
 
-
+    
 def isLineValid(line_comp):
     """Checks if line is valid that is the instruction is valid and the size corresponds to the instruction"""
     if isInstructionValid(line_comp[0]) == False:
