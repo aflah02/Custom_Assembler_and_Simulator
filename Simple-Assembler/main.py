@@ -265,7 +265,7 @@ checkdiv = list(map(str, ls_inputs[-1].split()))
 if HLT_COUNT == 1 and checkdiv[-1] != 'hlt':
     error_tracker.append(f'ERROR (hlt) for line number {LINE_COUNT+1}: hlt not present as last instruction')
     VALID = False
-if if HLT_COUNT == 1 and checkdiv[-1] == 'hlt':
+if HLT_COUNT == 1 and checkdiv[-1] == 'hlt':
     a = checkdiv[0]
     b = a[-1::]
     if b==":":
