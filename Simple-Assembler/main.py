@@ -245,17 +245,20 @@ for line in ls_inputs:
         break
 
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -1:
-        error_tracker.append(f'ERROR (Invalid Register (No such Register Found) at line number {LINE_COUNT+1}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only, which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        if (line_comp[0] == 'movr' or line_comp[0] == 'movi'):
+            error_tracker.append(f'ERROR (Invalid Register (No such Register Found) at line number {LINE_COUNT+1}): Wrong Syntax used for Instruction mov, kindly use acceptable argument(s) only, which in case of mov is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        else:
+            error_tracker.append(f'ERROR (Invalid Register (No such Register Found) at line number {LINE_COUNT+1}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only, which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
         VALID = False
         break
 
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -2:
-        error_tracker.append(f'ERROR (Invalid Immediate (Not Starting with $) at line number {LINE_COUNT+1}): Wrong Syntax used for Instruction {line_comp[0]}, kindly use acceptable argument(s) only, which in case of {line_comp[0]} is/are {type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]}')
+        error_tracker.append(f'ERROR (Illegal Immediate Value used at line number {LINE_COUNT+1})')
         VALID = False
         break
 
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -3:
-        error_tracker.append(f'ERROR (Invalid Immediate (Out of Range) at line number {LINE_COUNT+1}): Kindly use Immediates between 0 and 255 (Inclusive of both Limits) for instruction {LINE_COUNT}')
+        error_tracker.append(f'ERROR (Illegal Immediate Value used at line number {LINE_COUNT+1})')
         VALID = False
         break
 
@@ -305,7 +308,7 @@ else:
     len_without_vars_and_labels = 0
     for inst in ls_inputs:
         inst_comps = list(map(str, inst.strip().split()))
-        if (inst_comps[0][-1] == ':' or inst_comps[0] == 'var'):
+        if (inst_comps[0] == 'var'):
             continue
         else:
             len_without_vars_and_labels += 1

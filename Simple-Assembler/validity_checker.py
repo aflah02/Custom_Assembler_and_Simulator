@@ -29,6 +29,10 @@ def isRegisterValid(register):
 
 def isImmediateValid(immediate):
     """Checks if immediate is valid"""
+    try:
+        int(immediate[1:])
+    except:
+        return False
     if immediate[0] != '$':
         return False
     else:
