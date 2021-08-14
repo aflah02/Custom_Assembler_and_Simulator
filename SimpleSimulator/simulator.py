@@ -14,6 +14,10 @@ flags = {
     'E':0
 }
 
+variables = {}
+
+labels = {}
+
 halt_encountered = False
 
 ls_inputs = []
@@ -23,4 +27,6 @@ while True:
         ls_inputs.append(input_line)
     except EOFError:
         break
-print(ls_inputs)
+
+while(halt_encountered == False):
+    pass
