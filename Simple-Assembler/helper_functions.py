@@ -141,12 +141,11 @@ def lineTypesMatch(line_comp,lbl_declared2,var_declared2):
                 return -3
         if ls_type_order[i] == 'Memory Address': #start from here
             if line_comp[0]=='ld' or line_comp[0]=='st':
-                for elem in var_declared2:
-                    if line_comp[-1] not in var_declared2:
-                        if line_comp[-1] in lbl_declared2: #illegal use
-                            return -5
-                        else:
-                            return -6      
+                if line_comp[-1] not in var_declared2:
+                    if line_comp[-1] in lbl_declared2: #illegal use
+                        return -5
+                    else:
+                        return -6      
             if line_comp[0]=='jmp' or line_comp[0]=='jlt' or line_comp[0]=='jgt' or line_comp[0]=='je': 
                 if line_comp[-1] not in lbl_declared2:
                     if line_comp[-1] in var_declared2: #illegal use
