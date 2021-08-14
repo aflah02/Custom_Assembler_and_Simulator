@@ -3,7 +3,7 @@ op_code_size = 5
 register_size = 3
 memory_address_size = 8
 immediate_size = 8
-ls_instructions = ['add','sub','movi','movr','ld','st','mul','div','rs','ls','xor','or',
+ls_instructions = ['add','sub','movi','movr','mov','ld','st','mul','div','rs','ls','xor','or',
 'and','not','cmp','jmp','jlt','jgt','je','hlt']
 ls_instructions2 = ['add','sub','mov','ld','st','mul','div','rs','ls','xor','or',
 'and','not','cmp','jmp','jlt','jgt','je','hlt']
