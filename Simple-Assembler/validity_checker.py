@@ -9,7 +9,13 @@ def isInstructionValid(instruction):
     else:
         return False
 
-
+def isInstructionValid(instruction):
+    """Checks if instruction is valid"""
+    if instruction in ls_instructions2:
+        return True
+    else:
+        return False
+    
 def isRegisterValid(register):
     """Checks if register is valid"""
     if register in ls_registers:
