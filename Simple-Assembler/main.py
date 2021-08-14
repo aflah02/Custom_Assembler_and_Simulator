@@ -332,13 +332,13 @@ else:
             inst_comps = inst_comps[1:]
 
         temp = ""
-        if line_comp[0]=="mov":
-            if "$" in line_comp[-1]:
+        if inst_comps[0]=="mov":
+            if "$" in inst_comps[-1]:
                 temp = "movi"
             else:
                 temp = "movr"
         else:
-            temp = line_comp[0]
+            temp = inst_comps[0]
 
         inst_type = OPcode_table[temp][-1]
         output_string += opcode_parser(temp)
