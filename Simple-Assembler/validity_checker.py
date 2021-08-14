@@ -46,6 +46,8 @@ def isSizeRight(instruction, ls):
     if instruction=='mov':
         if len(ls)==3:
             return True
-    if len(ls) == type_to_input_len[type_instruction]:
-        return True
+    else:
+        type_instruction = OPcode_table[instruction][-1]
+        if len(ls) == type_to_input_len[type_instruction]:
+            return True
     return False
