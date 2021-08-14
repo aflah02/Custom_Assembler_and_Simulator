@@ -77,7 +77,7 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,va
             return (-6,i[1])
         else:
             c = lbl_inst[count2]
-            if isLineValid(c)!=0 or lineTypesMatch(c,lbl_declared2,var_declared2)!=0:
+            if isLineValid2(c)!=0 or lineTypesMatch(c,lbl_declared2,var_declared2)!=0:
                 return (-2,i[1])
         count2+=1
     count3 = 0
@@ -122,6 +122,13 @@ def isLineValid(line_comp):
         return -2
     return 0
 
+def isLineValid2(line_comp):
+    """Checks if line is valid that is the instruction is valid and the size corresponds to the instruction"""
+    if isInstructionValid2(line_comp[0]) == False:
+        return -1
+    if isSizeRight(line_comp[0], line_comp) == False:
+        return -2
+    return 0
 
 def lineTypesMatch(line_comp,lbl_declared2,var_declared2):
     """Checks if the objects in the line match the objects which they were supposed to be i.e. registers
