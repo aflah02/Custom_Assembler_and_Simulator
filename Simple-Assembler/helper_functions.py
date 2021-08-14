@@ -133,7 +133,15 @@ def isLineValid2(line_comp):
 def lineTypesMatch(line_comp,lbl_declared2,var_declared2):
     """Checks if the objects in the line match the objects which they were supposed to be i.e. registers
     are in place of registers in the syntax and so on"""
-    ls_type_order = type_to_syntaxconstituents[OPcode_table[line_comp[0]][-1]]
+    temp = ""
+    if line_comp[0]=="mov":
+        if "$" in line_comp[-1]:
+            temp = "movi"
+        else:
+            temp = "movr"
+    else:
+        temp = line_comp[0]
+    ls_type_order = type_to_syntaxconstituents[OPcode_table[temp][-1]]
     for i in range(1, len(line_comp)):
         if ls_type_order[i] == 'Register':
             if isRegisterValid(line_comp[i]) is False:

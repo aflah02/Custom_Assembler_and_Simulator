@@ -331,8 +331,17 @@ else:
         if inst_comps[0][-1] == ":":
             inst_comps = inst_comps[1:]
 
-        inst_type = OPcode_table[inst_comps[0]][-1]
-        output_string += opcode_parser(inst_comps[0])
+        temp = ""
+        if line_comp[0]=="mov":
+            if "$" in line_comp[-1]:
+                temp = "movi"
+            else:
+                temp = "movr"
+        else:
+            temp = line_comp[0]
+
+        inst_type = OPcode_table[temp][-1]
+        output_string += opcode_parser(temp)
         output_string += '0' * type_to_unusedbits[inst_type]
 
         for i in range(type_to_reg_no[inst_type]):
