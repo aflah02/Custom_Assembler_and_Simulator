@@ -90,6 +90,8 @@ for i in range(len(ls_inputs)):
     line = ls_inputs[i]
     line = line.strip()
     line_comp = list(map(str, line.split()))
+    if line_comp[0] == 'movi' or line_comp[0] == 'movr':
+        error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]} for instruction {i+1}')
     if line_comp[0] == 'mov':
         if line_comp[-1][0] == '$':
             line_comp[0] = 'movi'
@@ -145,7 +147,7 @@ if validvar[0] == -4:
         if var_declared2[i] == validvar[1]:
             index = i
             break
-    error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction  for instruction {index+1}')
+    error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction for instruction {index+1}')
     VALID = False
 if validvar[0] == -5:
     lenarr = len(var_declared2)
@@ -190,7 +192,7 @@ if validlbl[0] == -5:
     VALID = False
 
 if validlbl[0] == -6:
-    error_tracker.append(f'ERROR (Label): Invalid label name (only numeric) for instruction {validlbl[1]+1}')
+    error_tracker.append(f'ERROR (Label): Invalid label name (only numeric or empty) for instruction {validlbl[1]+1}')
     VALID = False    
     
 duptuple = Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)
@@ -228,10 +230,11 @@ for line in ls_inputs:
         b =line_comp[-1]
         if b=='hlt':
             HLT_COUNT+=1
+        LINE_COUNT+=1
         continue
 
     if line_comp[0]=="var":
-        LINE_COUNT-=1
+        LINE_COUNT+=1
         continue
 
     if isLineValid(line_comp) == -1:
@@ -273,7 +276,7 @@ for line in ls_inputs:
         break
 
     if lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -6 or lineTypesMatch(line_comp,lbl_declared2,var_declared2) == -7:
-        error_tracker.append(f'ERROR Invalid use of variable at line numberr {LINE_COUNT+1}')
+        error_tracker.append(f'ERROR Invalid use of variable at line number {LINE_COUNT+1}')
         VALID = False
         break
     

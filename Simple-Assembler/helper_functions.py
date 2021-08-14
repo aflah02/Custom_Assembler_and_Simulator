@@ -27,15 +27,15 @@ def isVarValid(var_declared,var_called,alphanum,inst):
             b = len(a)
             count = 0
             count2 = 0
-            for i in a:
-                if i in alphanum:
+            for j in a:
+                if j in alphanum:
                     count+=1
-                if i in numarr:
+                if j in numarr:
                     count2+=1
             if count!=b:
                 return (-2,i[0])
             if b==count2:
-                    return (-5,i[0])
+                return (-5,i[0])
     b2 = len(var_called)
     var2 = []
     for i in var_declared:
