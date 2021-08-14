@@ -138,6 +138,15 @@ if validvar[0] == -4:
             break
     error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction  for instruction {index+1}')
     VALID = False
+if validvar[0] == -5:
+    lenarr = len(var_declared2)
+    index = 0
+    for i in range(0,lenarr):
+        if var_declared2[i] == validvar[1]:
+            index = i
+            break
+    error_tracker.append(f'ERROR (Variable): Variable name incorrect (only numeric) for instruction {index+1}')
+    VALID = False     
     
 validlbl = isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions3,alphanum,lbl_declared2,var_declared2)
 
@@ -170,6 +179,10 @@ if validlbl[0] == -4:
 if validlbl[0] == -5:
     error_tracker.append(f'ERROR (Label): Label instruction not given for instruction {consterr+1}')
     VALID = False
+
+if validlbl[0] == -6:
+    error_tracker.append(f'ERROR (Label): Invalid label name (only numeric) for instruction {validlbl[1]+1}')
+    VALID = False    
     
 duptuple = Duplication(lbl_declared,var_declared,lbl_declared2,var_declared2)
 
