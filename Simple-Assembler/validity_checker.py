@@ -43,6 +43,9 @@ def isImmediateRangeValid(immediate):
 def isSizeRight(instruction, ls):
     """Checks if required number of arguments are there or not"""
     type_instruction = OPcode_table[instruction][-1]
+    if instruction=='mov':
+        if len(ls)==3:
+            return True
     if len(ls) == type_to_input_len[type_instruction]:
         return True
     return False
