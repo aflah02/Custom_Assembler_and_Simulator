@@ -104,7 +104,7 @@ for line in ls_inputs:
     LINE_COUNT3+=1
 
     
-validvar = isVarValid(var_declared,var_called,alphanum,ls_instructions2)
+validvar = isVarValid(var_declared,var_called,alphanum,ls_instructions3)
 
 if validvar[0] == -1:
     error_tracker.append(f'ERROR (Variable): Illegal declaration of variables for instruction {validvar[1]}')
@@ -139,7 +139,7 @@ if validvar[0] == -4:
     error_tracker.append(f'ERROR (Variable): Variable has the same name as an ISA instruction  for instruction {index+1}')
     VALID = False
     
-validlbl = isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions2,alphanum,lbl_declared2,var_declared2)
+validlbl = isLabelValid(lbl_called,lbl_declared,lbl_instf,ls_instructions3,alphanum,lbl_declared2,var_declared2)
 
 if validlbl[0] == -1:
     error_tracker.append(f'ERROR (Label): Invalid label name for instruction {validlbl[1]+1}')
