@@ -9,7 +9,7 @@ def isInstructionValid(instruction):
     else:
         return False
 
-def isInstructionValid(instruction):
+def isInstructionValid2(instruction):
     """Checks if instruction is valid"""
     if instruction in ls_instructions2:
         return True
