@@ -6,13 +6,20 @@ from sys import stdin
 from parsers import *
 
 
-ls_inputs = []
+ls_inputs2 = []
 while True:
     try:
         input_line = input()
-        ls_inputs.append(input_line)
+        ls_inputs2.append(input_line)
     except EOFError:
         break
+
+ls_inputs = []
+for i in range(len(ls_inputs2)):
+    if (ls_inputs2[i] == ''):
+        continue
+    else:
+        ls_inputs.append(ls_inputs2[i])
 
 VALID = True
 HLT_COUNT = 0
@@ -94,13 +101,15 @@ for i in range(len(ls_inputs)):
 for line in ls_inputs:
     line = line.strip()
     line_comp = list(map(str, line.split()))
-    if len(line_comp)==2:
-        if line_comp[0] == "var":
+    if line_comp[0] == "var":
+        if len(line_comp)==2:
             b = line_comp[-1]
             c = (b,LINE_COUNT3)
             var_declared.append(c)
             var_declared2.append(b)
             LINE_COUNT3-=1
+        else:
+            error_tracker.append(f'ERROR (Variable): Illegal declaration of variables (Length 2 was expected, Length found was {len(line_comp)}) for instruction {LINE_COUNT3}')
     LINE_COUNT3+=1
 
     
