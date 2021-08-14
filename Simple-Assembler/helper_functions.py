@@ -25,11 +25,16 @@ def isVarValid(var_declared,var_called,alphanum,inst):
             a = i[0]
             b = len(a)
             count = 0
+            count2 = 0
             for i in a:
                 if i in alphanum:
                     count+=1
+                if i in numarr:
+                    count2+=1
             if count!=b:
                 return (-2,i[0])
+            if b==count2:
+                    return (-5,i[0])
     b2 = len(var_called)
     var2 = []
     for i in var_declared:
@@ -58,11 +63,16 @@ def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,va
         a = i[0]
         b = len(a)
         count = 0
+        count4 = 0
         for j in a:
             if j in alphanum:
                 count+=1
+            if j in numarr:
+                count4+=1
         if count!=b:
             return (-1,i[1])
+        if b==count4:
+            return (-6,i[1])
         else:
             c = lbl_inst[count2]
             if isLineValid(c)!=0 or lineTypesMatch(c,lbl_declared2,var_declared2)!=0:
