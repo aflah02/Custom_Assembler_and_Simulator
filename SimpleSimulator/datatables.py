@@ -102,3 +102,16 @@ type_to_syntaxconstituents = {
     'E':['Instruction','Memory Address'],
     'F':['Instruction']
 }
+'''
+encoding_to_register tells us the encoding of a register
+'''
+encoding_to_register = {
+    '000': 'R0',
+    '001': 'R1',
+    '010': 'R2',
+    '011': 'R3',
+    '100': 'R4',
+    '101': 'R5',
+    '110': 'R6',
+    '111': 'FLAGS',
+}
