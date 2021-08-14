@@ -15,6 +15,7 @@ def getRegisterCount(type):
 
 def isVarValid(var_declared,var_called,alphanum,inst):
     """Checks if Variables are Valid"""
+    numarr = ['0','1','2','3','4','5','6','7','8','9']
     inst2 = inst.copy()
     inst2.append('var')
     len1 = len(var_declared)
@@ -52,6 +53,7 @@ def isVarValid(var_declared,var_called,alphanum,inst):
 
 def isLabelValid(lbl_called,lbl_declared,lbl_inst,inst,alphanum,lbl_declared2,var_declared2): #add in main
     """Checks if Labels are Valid"""
+    numarr = ['0','1','2','3','4','5','6','7','8','9']
     inst2 = inst.copy()
     inst2.append('var')
     l1 = len(lbl_declared)
