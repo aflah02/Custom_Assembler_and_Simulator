@@ -52,13 +52,16 @@ while True:
 
 CYCLE_COUNTER = 0
 PROGRAM_COUNTER = 0
+
 PROGRAM_COUNTER_LOCATION = []
-CYCLE_COUNTER_VALUE = []
+CYCLE_COUNTER_VALUES = []
 
 while(halt_encountered == False):
+    CYCLE_COUNTER_VALUES.append(CYCLE_COUNTER)
+    PROGRAM_COUNTER_LOCATION.append(PROGRAM_COUNTER)
     CYCLE_COUNTER += 1
     binary_instruction = ls_inputs[PROGRAM_COUNTER]
-    opcode = binary_instruction[0:4]
+    opcode = binary_instruction[0:5]
     instruction = opcode_table[opcode][0]
     instruction_type = opcode_table[opcode][1]
     component_list = TypeWiseSplitter(binary_instruction, instruction_type)
@@ -73,4 +76,4 @@ while(halt_encountered == False):
             else:
                 register_tracker[register_1] = value_to_store
     if instruction_type == 'B':
-        
+        pass

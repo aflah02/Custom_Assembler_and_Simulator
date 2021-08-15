@@ -19,3 +19,12 @@ def immediate_parser(immediate):
         decimal= decimal*2 + int(digit)
     return decimal
 
+def decimal_to_binary(decimal):
+    binary = bin(decimal)[2:]
+    if len(binary) > 8:
+        return binary[-9:-1]
+    else:
+        return '0'*(8-len(binary)) + binary
+    pass
+
+print(decimal_to_binary(1000))
