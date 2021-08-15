@@ -75,5 +75,7 @@ while(halt_encountered == False):
                 flags['V'] = 1
             else:
                 register_tracker[register_1] = value_to_store
+        else:
+            register_tracker[register_1] = value_to_store
     if instruction_type == 'B':
         pass
