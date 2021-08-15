@@ -66,7 +66,6 @@ def type_c_executor(instruction, first_register, second_register):
             return "L"
         else:
             return "G"
-    pass
 
 ls_inputs = []
 while True:
