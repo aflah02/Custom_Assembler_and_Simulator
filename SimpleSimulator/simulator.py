@@ -1,3 +1,4 @@
+from SimpleSimulator.simulator_parsers import decimal_to_binary, immediate_parser
 from datatables import *
 from helpers import *
 
@@ -41,6 +42,13 @@ def type_a_executor(instruction, second_register, third_register):
     elif instruction == 'xor':
         return register_tracker[second_register] ^ register_tracker[third_register]
 
+def type_b_executor(instruction, first_register, immediate):
+    if instruction == 'mov':
+        return immediate
+    elif instruction == 'rs':
+        return register_tracker[first_register] >> immediate
+    elif instruction == 'ls':
+        return register_tracker[first_register] << immediate
 
 ls_inputs = []
 while True:
@@ -78,4 +86,8 @@ while(halt_encountered == False):
         else:
             register_tracker[register_1] = value_to_store
     if instruction_type == 'B':
-        pass
+        register = encoding_to_register[component_list[1]]
+        immediate = immediate_parser(component_list[-1])
+        value_to_store = type_b_executor(instruction, register, immediate)
+        register_tracker[register] = value_to_store
+        
