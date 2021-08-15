@@ -61,3 +61,9 @@ while(halt_encountered == False):
     instruction = opcode_table[opcode][0]
     instruction_type = opcode_table[opcode][1]
     component_list = TypeWiseSplitter(binary_instruction, instruction_type)
+    if instruction_type == 'A':
+        register_1 = encoding_to_register[component_list[1]]
+        register_2 = encoding_to_register[component_list[2]]
+        register_3 = encoding_to_register[component_list[3]]
+        value_to_store = type_a_executor(instruction, register_2, register_3)
+        register_tracker[register_1] = value_to_store

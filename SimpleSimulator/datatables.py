@@ -103,7 +103,7 @@ type_to_syntaxconstituents = {
     'F':['Instruction']
 }
 '''
-encoding_to_register tells us the encoding of a register
+encoding_to_register tells us the register of a given encoding
 '''
 encoding_to_register = {
     '000': 'R0',
