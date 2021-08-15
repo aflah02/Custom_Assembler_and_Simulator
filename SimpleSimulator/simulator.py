@@ -126,17 +126,22 @@ while(halt_encountered == False):
         mem_addf =  immediate_parser(mem_add)
         if instruction == 'jmp':
             PROGRAM_COUNTER = mem_addf
+            continue
         if instruction == 'jlt':
             if flags['L']==1:
                 PROGRAM_COUNTER = mem_addf
+                continue
         if instruction == 'jgt':
             if flags['G']==1:
                 PROGRAM_COUNTER = mem_addf
+                continue
         if instruction == 'je':
             if flags['E']==1:
                 PROGRAM_COUNTER = mem_addf
+                continue
     elif instruction_type == 'F':
         if instruction == 'hlt':
             halt_encountered = True
+            continue
     
     PROGRAM_COUNTER+=1       
