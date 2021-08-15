@@ -67,5 +67,10 @@ while(halt_encountered == False):
         register_2 = encoding_to_register[component_list[2]]
         register_3 = encoding_to_register[component_list[3]]
         value_to_store = type_a_executor(instruction, register_2, register_3)
-        if 
-        register_tracker[register_1] = value_to_store
+        if instruction == 'add' or instruction == 'sub' or instruction == 'mul':
+            if value_to_store > 255 or value_to_store < 0:
+                flags['V'] = 1
+            else:
+                register_tracker[register_1] = value_to_store
+    if instruction_type == 'B':
+        
