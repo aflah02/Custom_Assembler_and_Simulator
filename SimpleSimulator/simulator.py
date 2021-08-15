@@ -66,7 +66,8 @@ def type_c_executor(instruction, first_register, second_register):
             return "L"
         else:
             return "G"
-
+    
+    
 ls_inputs = []
 while True:
     try:
@@ -117,3 +118,25 @@ while(halt_encountered == False):
             register_tracker[first_register], register_tracker[second_register] = value_to_store
         elif instruction == 'cmp':
             flags[value_to_store] = 1
+    elif instruction_type == 'D':
+        if instruction == 'ld':
+        if instruction == 'st':
+    elif instruction_type == 'E':
+        mem_add = binary_instruction[8::]
+        mem_addf =  immediate_parser(mem_add)
+        if instruction == 'jmp':
+            PROGRAM_COUNTER = mem_addf
+        if instruction == 'jlt':
+            if flags['L']==1:
+                PROGRAM_COUNTER = mem_addf
+        if instruction == 'jgt':
+            if flags['G']==1:
+                PROGRAM_COUNTER = mem_addf
+        if instruction == 'je':
+            if flags['E']==1:
+                PROGRAM_COUNTER = mem_addf
+    elif instruction_type == 'F':
+        if instruction == 'hlt':
+            halt_encountered = True
+    
+    PROGRAM_COUNTER+=1       
