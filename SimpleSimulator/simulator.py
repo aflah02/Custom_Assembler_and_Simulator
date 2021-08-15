@@ -1,3 +1,7 @@
+from datatables import *
+from helpers import *
+
+
 register_tracker = {
     'R0': 0,
     'R1': 0,
@@ -37,17 +41,23 @@ def type_a_executor(instruction, second_register, third_register):
         return register_tracker[second_register] ^ register_tracker[third_register]
 
 
-# ls_inputs = []
-# while True:
-#     try:
-#         input_line = input()
-#         ls_inputs.append(input_line)
-#     except EOFError:
-#         break
+ls_inputs = []
+while True:
+    try:
+        input_line = input()
+        ls_inputs.append(input_line)
+    except EOFError:
+        break
 
-# while(halt_encountered == False):
-#     pass
+CYCLE_COUNTER = 0
+PROGRAM_COUNTER = 0
+PROGRAM_COUNTER_LOCATION = []
+CYCLE_COUNTER_VALUE = []
 
-register_tracker['R0'] = 10
-register_tracker['R3'] = 20
-print(type_a_executor('add', 'R0', 'R3'))
+while(halt_encountered == False):
+    CYCLE_COUNTER += 1
+    binary_instruction = ls_inputs[PROGRAM_COUNTER]
+    opcode = binary_instruction[0:4]
+    instruction = opcode_table[opcode][0]
+    instruction_type = opcode_table[opcode][1]
+    component_list = TypeWiseSplitter(binary_instruction, instruction_type)

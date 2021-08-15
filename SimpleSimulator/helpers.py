@@ -1,5 +1,5 @@
 from datatables import *
-from simulator import *
+
 
 def TypeWiseSplitter(instruction, instruction_type):
     syntax_constituents = type_to_syntaxconstituents[instruction_type]
