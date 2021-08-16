@@ -20,10 +20,6 @@ flags = {
     'E':0
 }
 
-variables = {}
-
-labels = {}
-
 halt_encountered = False
 
 def type_a_executor(instruction, second_register, third_register):
