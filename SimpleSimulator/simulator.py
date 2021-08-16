@@ -53,7 +53,7 @@ def type_b_executor(instruction, first_register, immediate):
 def type_c_executor(instruction, first_register, second_register, flags_dict):
     if instruction == 'movr':
         if second_register == 'FLAGS':
-            return immediate_parser('0'*12 + str(flags_dict['V']) + str(flags_dict['L']) + str(flags_dict['G']) + str(flags_dict['E']))
+            return binary_to_decimal_parser('0'*12 + str(flags_dict['V']) + str(flags_dict['L']) + str(flags_dict['G']) + str(flags_dict['E']))
         else:
             return register_tracker[second_register]
     elif instruction == 'div':
