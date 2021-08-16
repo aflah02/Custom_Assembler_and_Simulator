@@ -16,7 +16,8 @@ def register_parser(register_code):
     return encoding_to_register[register_code]
 
 
-def immediate_parser(immediate):
+def binary_to_decimal_parser(immediate):
+    '''Parses Decimal Value from Binary Value'''
     decimal = 0
     for digit in immediate:
         decimal= decimal*2 + int(digit)
