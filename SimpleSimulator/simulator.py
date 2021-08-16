@@ -65,14 +65,12 @@ def type_c_executor(instruction, first_register, second_register, flags_dict):
             return "L"
         else:
             return "G"
-    
-total_lines = 0   
+     
 ls_inputs = []
 while True:
     try:
         input_line = input()
         ls_inputs.append(input_line)
-        total_lines+=1
     except EOFError:
         break
 
@@ -184,7 +182,6 @@ while(halt_encountered == False):
             mem_addf = binary_to_decimal_parser(mem_add)
             value_to_store =  "00000000" + eight_bit_decimal_to_binary(register_tracker[register_1])
             memory_dump_list[mem_addf] = value_to_store
-            total_lines+=1
         toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
         print(toPrint)
     elif instruction_type == 'E':
