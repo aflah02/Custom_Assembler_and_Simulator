@@ -260,5 +260,5 @@ while(halt_encountered == False):
 
     PROGRAM_COUNTER+=1 
     
-for i in memory_dump_list:
-    print(i)
+for i in range(len(memory_dump_list)):
+    print(memory_dump_list[i])
