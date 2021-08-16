@@ -50,9 +50,12 @@ def type_b_executor(instruction, first_register, immediate):
     elif instruction == 'ls':
         return register_tracker[first_register] << immediate
 
-def type_c_executor(instruction, first_register, second_register):
+def type_c_executor(instruction, first_register, second_register, flags_dict):
     if instruction == 'movr':
-        return register_tracker[second_register]
+        if second_register == 'FLAGS':
+            return immediate_parser('0'*12 + str(flags_dict['V']) + str(flags_dict['L']) + str(flags_dict['G']) + str(flags_dict['E']))
+        else:
+            return register_tracker[second_register]
     elif instruction == 'div':
         a, b = register_tracker[first_register], register_tracker[second_register]
         return (a//b, a%b)
@@ -143,11 +146,25 @@ while(halt_encountered == False):
     elif instruction_type == 'C':
         first_register = encoding_to_register[component_list[1]]
         second_register = encoding_to_register[component_list[-1]]
-        value_to_store = type_c_executor(instruction, first_register, second_register)
-        if instruction == 'movr' or instruction == 'not':
+        value_to_store = type_c_executor(instruction, first_register, second_register, flags)
+        if instruction == 'movr':
+            register_tracker[first_register] = value_to_store
+            flags['E'] = 0
+            flags['V'] = 0
+            flags['G'] = 0
+            flags['L'] = 0
+        elif instruction == 'not':
+            flags['E'] = 0
+            flags['V'] = 0
+            flags['G'] = 0
+            flags['L'] = 0
             register_tracker[first_register] = value_to_store
         elif instruction == 'div':
-            register_tracker[first_register], register_tracker[second_register] = value_to_store
+            flags['E'] = 0
+            flags['V'] = 0
+            flags['G'] = 0
+            flags['L'] = 0
+            register_tracker['R0'], register_tracker['R1'] = value_to_store
         elif instruction == 'cmp':
             flags[value_to_store] = 1
         toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
@@ -170,8 +187,6 @@ while(halt_encountered == False):
             mem_add = component_list[2]
             mem_addf = immediate_parser(mem_add)
             value_to_store =  "00000000" + eight_bit_decimal_to_binary(register_tracker[register_1])
-            print(mem_addf)
-            print(value_to_store)
             memory_dump_list[mem_addf] = value_to_store
             total_lines+=1
         toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
@@ -188,6 +203,7 @@ while(halt_encountered == False):
             toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
             print(toPrint)
             continue
+
         if instruction == 'jlt':
             if flags['L']==1:
                 PROGRAM_COUNTER = mem_addf
@@ -198,6 +214,13 @@ while(halt_encountered == False):
                 toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
                 print(toPrint)
                 continue
+            else:
+                flags['E'] = 0
+                flags['V'] = 0
+                flags['G'] = 0
+                flags['L'] = 0
+                toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+                print(toPrint)
         if instruction == 'jgt':
             if flags['G']==1:
                 PROGRAM_COUNTER = mem_addf
@@ -208,6 +231,13 @@ while(halt_encountered == False):
                 toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
                 print(toPrint)
                 continue
+            else:
+                flags['E'] = 0
+                flags['V'] = 0
+                flags['G'] = 0
+                flags['L'] = 0
+                toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+                print(toPrint)
         if instruction == 'je':
             if flags['E']==1:
                 PROGRAM_COUNTER = mem_addf
@@ -218,6 +248,13 @@ while(halt_encountered == False):
                 toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
                 print(toPrint)
                 continue
+            else:
+                flags['E'] = 0
+                flags['V'] = 0
+                flags['G'] = 0
+                flags['L'] = 0
+                toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+                print(toPrint) 
     elif instruction_type == 'F':
         flags['E'] = 0
         flags['V'] = 0
