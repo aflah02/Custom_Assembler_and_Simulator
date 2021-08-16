@@ -2,6 +2,8 @@ from datatables import *
 
 
 def TypeWiseSplitter(instruction, instruction_type):
+    '''Splits the instruction into it's components while 
+    discarding unused bits based on instruction type'''
     syntax_constituents = type_to_syntaxconstituents[instruction_type]
     unused_bits = type_to_unusedbits[instruction_type]
     component_list = []
