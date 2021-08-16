@@ -138,7 +138,7 @@ while(halt_encountered == False):
         flags['G'] = 0
         flags['L'] = 0
         register = encoding_to_register[component_list[1]]
-        immediate = immediate_parser(component_list[-1])
+        immediate = binary_to_decimal_parser(component_list[-1])
         value_to_store = type_b_executor(instruction, register, immediate)
         register_tracker[register] = value_to_store
         toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
@@ -177,15 +177,15 @@ while(halt_encountered == False):
         if instruction == 'ld':
             register_1 = encoding_to_register[component_list[1]]
             mem_add = component_list[2]
-            mem_addf = immediate_parser(mem_add)
+            mem_addf = binary_to_decimal_parser(mem_add)
             value_to_store = memory_dump_list[mem_addf]
             value_to_store = value_to_store[8:]
-            value_to_storef = immediate_parser(value_to_store)
+            value_to_storef = binary_to_decimal_parser(value_to_store)
             register_tracker[register_1] = value_to_storef
         if instruction == 'st':
             register_1 = encoding_to_register[component_list[1]]
             mem_add = component_list[2]
-            mem_addf = immediate_parser(mem_add)
+            mem_addf = binary_to_decimal_parser(mem_add)
             value_to_store =  "00000000" + eight_bit_decimal_to_binary(register_tracker[register_1])
             memory_dump_list[mem_addf] = value_to_store
             total_lines+=1
@@ -193,7 +193,7 @@ while(halt_encountered == False):
         print(toPrint)
     elif instruction_type == 'E':
         mem_add = binary_instruction[8::]
-        mem_addf =  immediate_parser(mem_add)
+        mem_addf =  binary_to_decimal_parser(mem_add)
         if instruction == 'jmp':
             PROGRAM_COUNTER = mem_addf
             flags['E'] = 0
