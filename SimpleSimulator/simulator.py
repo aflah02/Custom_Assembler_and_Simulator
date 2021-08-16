@@ -262,3 +262,6 @@ while(halt_encountered == False):
     
 for i in range(len(memory_dump_list)):
     print(memory_dump_list[i])
+
+import matplotlib.pyplot as plt
+plt.scatter(CYCLE_COUNTER_VALUES, PROGRAM_COUNTER_LOCATION)
