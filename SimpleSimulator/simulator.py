@@ -92,6 +92,10 @@ while(halt_encountered == False):
     instruction_type = opcode_table[opcode][1]
     component_list = TypeWiseSplitter(binary_instruction, instruction_type)
     if instruction_type == 'A':
+        flags['E'] = 0
+        flags['V'] = 0
+        flags['G'] = 0
+        flags['L'] = 0
         register_1 = encoding_to_register[component_list[1]]
         register_2 = encoding_to_register[component_list[2]]
         register_3 = encoding_to_register[component_list[3]]
@@ -104,6 +108,10 @@ while(halt_encountered == False):
         else:
             register_tracker[register_1] = value_to_store
     elif instruction_type == 'B':
+        flags['E'] = 0
+        flags['V'] = 0
+        flags['G'] = 0
+        flags['L'] = 0
         register = encoding_to_register[component_list[1]]
         immediate = immediate_parser(component_list[-1])
         value_to_store = type_b_executor(instruction, register, immediate)
@@ -119,27 +127,48 @@ while(halt_encountered == False):
         elif instruction == 'cmp':
             flags[value_to_store] = 1
     elif instruction_type == 'D':
-        if instruction == 'ld':
-        if instruction == 'st':
+        pass
+        # if instruction == 'ld':
+        # if instruction == 'st':
     elif instruction_type == 'E':
         mem_add = binary_instruction[8::]
         mem_addf =  immediate_parser(mem_add)
         if instruction == 'jmp':
             PROGRAM_COUNTER = mem_addf
+            flags['E'] = 0
+            flags['V'] = 0
+            flags['G'] = 0
+            flags['L'] = 0
             continue
         if instruction == 'jlt':
             if flags['L']==1:
                 PROGRAM_COUNTER = mem_addf
+                flags['E'] = 0
+                flags['V'] = 0
+                flags['G'] = 0
+                flags['L'] = 0
                 continue
         if instruction == 'jgt':
             if flags['G']==1:
                 PROGRAM_COUNTER = mem_addf
+                flags['E'] = 0
+                flags['V'] = 0
+                flags['G'] = 0
+                flags['L'] = 0
                 continue
         if instruction == 'je':
             if flags['E']==1:
                 PROGRAM_COUNTER = mem_addf
+                flags['E'] = 0
+                flags['V'] = 0
+                flags['G'] = 0
+                flags['L'] = 0
                 continue
     elif instruction_type == 'F':
+        flags['E'] = 0
+        flags['V'] = 0
+        flags['G'] = 0
+        flags['L'] = 0
         if instruction == 'hlt':
             halt_encountered = True
             continue
