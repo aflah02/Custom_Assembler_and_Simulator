@@ -1,4 +1,4 @@
-from SimpleSimulator.simulator_parsers import *
+from simulator_parsers import *
 from datatables import *
 from helpers import *
 
@@ -98,8 +98,8 @@ def printOutput(PC, reg_dict, flags_dict):
     r5_val = sixteen_bit_decimal_to_binary(reg_dict['R5'])
     r6_val = sixteen_bit_decimal_to_binary(reg_dict['R6'])
     flags_val = '0'*12 + flags_dict['V'] + flags_dict['L'] + flags_dict['G'] + flags_dict['E'] 
-    print(f'{PC_val} {r1_val} {r2_val} {r3_val} {r4_val} {r5_val} {r6_val} {flags_val}')
-    pass
+    return_string = f'{PC_val} {r1_val} {r2_val} {r3_val} {r4_val} {r5_val} {r6_val} {flags_val}'
+    return return_string
 
 while(halt_encountered == False):
     CYCLE_COUNTER_VALUES.append(CYCLE_COUNTER)
@@ -126,6 +126,8 @@ while(halt_encountered == False):
                 register_tracker[register_1] = value_to_store
         else:
             register_tracker[register_1] = value_to_store
+        toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+        print(toPrint)
     elif instruction_type == 'B':
         flags['E'] = 0
         flags['V'] = 0
@@ -135,6 +137,8 @@ while(halt_encountered == False):
         immediate = immediate_parser(component_list[-1])
         value_to_store = type_b_executor(instruction, register, immediate)
         register_tracker[register] = value_to_store
+        toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+        print(toPrint)
     elif instruction_type == 'C':
         first_register = encoding_to_register[component_list[1]]
         second_register = encoding_to_register[component_list[-1]]
@@ -145,6 +149,8 @@ while(halt_encountered == False):
             register_tracker[first_register], register_tracker[second_register] = value_to_store
         elif instruction == 'cmp':
             flags[value_to_store] = 1
+        toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+        print(toPrint)
     elif instruction_type == 'D':
         flags['E'] = 0
         flags['V'] = 0
@@ -165,6 +171,8 @@ while(halt_encountered == False):
             value_to_store =  "00000000" + eight_bit_decimal_to_binary(register_tracker[register_1])
             memory_dump_list[total_lines] = value_to_store
             total_lines+=1
+        toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+        print(toPrint)
     elif instruction_type == 'E':
         mem_add = binary_instruction[8::]
         mem_addf =  immediate_parser(mem_add)
@@ -174,6 +182,8 @@ while(halt_encountered == False):
             flags['V'] = 0
             flags['G'] = 0
             flags['L'] = 0
+            toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+            print(toPrint)
             continue
         if instruction == 'jlt':
             if flags['L']==1:
@@ -182,6 +192,8 @@ while(halt_encountered == False):
                 flags['V'] = 0
                 flags['G'] = 0
                 flags['L'] = 0
+                toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+                print(toPrint)
                 continue
         if instruction == 'jgt':
             if flags['G']==1:
@@ -190,6 +202,8 @@ while(halt_encountered == False):
                 flags['V'] = 0
                 flags['G'] = 0
                 flags['L'] = 0
+                toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+                print(toPrint)
                 continue
         if instruction == 'je':
             if flags['E']==1:
@@ -198,6 +212,8 @@ while(halt_encountered == False):
                 flags['V'] = 0
                 flags['G'] = 0
                 flags['L'] = 0
+                toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+                print(toPrint)
                 continue
     elif instruction_type == 'F':
         flags['E'] = 0
@@ -206,9 +222,11 @@ while(halt_encountered == False):
         flags['L'] = 0
         if instruction == 'hlt':
             halt_encountered = True
+            toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+            print(toPrint)
             continue
- 
+
     PROGRAM_COUNTER+=1 
     
 for i in memory_dump_list:
-    print(i, end = '\n')
+    print(i)
