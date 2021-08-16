@@ -2,6 +2,7 @@ from datatables import *
 
 
 def instruction_parser(opcode):
+    '''Parses Instruction from Opcode'''
     return opcode_table[opcode][0]
 
 

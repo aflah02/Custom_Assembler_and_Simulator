@@ -203,7 +203,6 @@ while(halt_encountered == False):
             toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
             print(toPrint)
             continue
-
         if instruction == 'jlt':
             if flags['L']==1:
                 PROGRAM_COUNTER = mem_addf
