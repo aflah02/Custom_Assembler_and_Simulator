@@ -76,6 +76,12 @@ while True:
     except EOFError:
         break
 
+memory_dump_list = ls_inputs.copy()
+ls_inputs_length = len(ls_inputs)
+
+for i in range(256 - ls_inputs_length):
+    memory_dump_list.append('0'*16)
+
 CYCLE_COUNTER = 0
 PROGRAM_COUNTER = 0
 
