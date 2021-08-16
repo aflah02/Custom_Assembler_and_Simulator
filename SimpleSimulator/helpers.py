@@ -11,8 +11,8 @@ def TypeWiseSplitter(instruction, instruction_type):
         component_list.append(instruction[10:13])
         component_list.append(instruction[13:16])
     elif instruction_type == 'B':
-        component_list.append(instruction[7:10])
-        component_list.append(instruction[10:])
+        component_list.append(instruction[5:8])
+        component_list.append(instruction[8:16])
     elif instruction_type == 'C':
         component_list.append(instruction[10:13])
         component_list.append(instruction[13:16])

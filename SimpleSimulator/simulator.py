@@ -52,7 +52,7 @@ def type_b_executor(instruction, first_register, immediate):
 
 def type_c_executor(instruction, first_register, second_register):
     if instruction == 'movr':
-        return second_register
+        return register_tracker[second_register]
     elif instruction == 'div':
         a, b = register_tracker[first_register], register_tracker[second_register]
         return (a//b, a%b)
@@ -91,6 +91,7 @@ CYCLE_COUNTER_VALUES = []
 
 def printOutput(PC, reg_dict, flags_dict):
     PC_val = eight_bit_decimal_to_binary(PC)
+    r0_val = sixteen_bit_decimal_to_binary(reg_dict['R0'])
     r1_val = sixteen_bit_decimal_to_binary(reg_dict['R1'])
     r2_val = sixteen_bit_decimal_to_binary(reg_dict['R2'])
     r3_val = sixteen_bit_decimal_to_binary(reg_dict['R3'])
@@ -98,7 +99,7 @@ def printOutput(PC, reg_dict, flags_dict):
     r5_val = sixteen_bit_decimal_to_binary(reg_dict['R5'])
     r6_val = sixteen_bit_decimal_to_binary(reg_dict['R6'])
     flags_val = '0'*12 + str(flags_dict['V']) + str(flags_dict['L']) + str(flags_dict['G']) + str(flags_dict['E'])
-    return_string = f'{PC_val} {r1_val} {r2_val} {r3_val} {r4_val} {r5_val} {r6_val} {flags_val}'
+    return_string = f'{PC_val} {r0_val} {r1_val} {r2_val} {r3_val} {r4_val} {r5_val} {r6_val} {flags_val}'
     return return_string
 
 while(halt_encountered == False):
@@ -160,10 +161,10 @@ while(halt_encountered == False):
             register_1 = encoding_to_register[component_list[1]]
             mem_add = component_list[2]
             mem_addf = immediate_parser(mem_add)
-            value_to_store = ls_inputs[mem_addf]
+            value_to_store = memory_dump_list[mem_addf]
             value_to_store = value_to_store[8:]
             value_to_storef = immediate_parser(value_to_store)
-            register_tracker[register_1] = value_to_store
+            register_tracker[register_1] = value_to_storef
         if instruction == 'st':
             register_1 = encoding_to_register[component_list[1]]
             mem_add = component_list[2]
@@ -228,5 +229,5 @@ while(halt_encountered == False):
 
     PROGRAM_COUNTER+=1 
     
-for i in memory_dump_list:
-    print(i)
+# for i in memory_dump_list:
+#     print(i)
