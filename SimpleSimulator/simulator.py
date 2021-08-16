@@ -97,7 +97,7 @@ def printOutput(PC, reg_dict, flags_dict):
     r4_val = sixteen_bit_decimal_to_binary(reg_dict['R4'])
     r5_val = sixteen_bit_decimal_to_binary(reg_dict['R5'])
     r6_val = sixteen_bit_decimal_to_binary(reg_dict['R6'])
-    flags_val = '0'*12 + flags_dict['V'] + flags_dict['L'] + flags_dict['G'] + flags_dict['E'] 
+    flags_val = '0'*12 + str(flags_dict['V']) + str(flags_dict['L']) + str(flags_dict['G']) + str(flags_dict['E'])
     return_string = f'{PC_val} {r1_val} {r2_val} {r3_val} {r4_val} {r5_val} {r6_val} {flags_val}'
     return return_string
 
