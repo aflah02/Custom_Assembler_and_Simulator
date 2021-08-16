@@ -67,12 +67,13 @@ def type_c_executor(instruction, first_register, second_register):
         else:
             return "G"
     
-    
+total_lines = 0   
 ls_inputs = []
 while True:
     try:
         input_line = input()
         ls_inputs.append(input_line)
+        total_lines+=1
     except EOFError:
         break
 
@@ -133,9 +134,25 @@ while(halt_encountered == False):
         elif instruction == 'cmp':
             flags[value_to_store] = 1
     elif instruction_type == 'D':
-        pass
-        # if instruction == 'ld':
-        # if instruction == 'st':
+        flags['E'] = 0
+        flags['V'] = 0
+        flags['G'] = 0
+        flags['L'] = 0
+        if instruction == 'ld':
+            register_1 = encoding_to_register[component_list[1]]
+            mem_add = component_list[2]
+            mem_addf = immediate_parser(mem_add)
+            value_to_store = ls_inputs[mem_addf]
+            value_to_store = value_to_store[8:]
+            value_to_storef = immediate_parser(value_to_store)
+            register_tracker[register_1] = value_to_store
+        if instruction == 'st':
+            register_1 = encoding_to_register[component_list[1]]
+            mem_add = component_list[2]
+            mem_addf = immediate_parser(mem_add)
+            value_to_store =  "00000000" + decimal_to_binary(register_tracker[register_1])
+            memory_dump_list[total_lines] = value_to_store
+            total_lines+=1
     elif instruction_type == 'E':
         mem_add = binary_instruction[8::]
         mem_addf =  immediate_parser(mem_add)
@@ -178,5 +195,8 @@ while(halt_encountered == False):
         if instruction == 'hlt':
             halt_encountered = True
             continue
+ 
+    PROGRAM_COUNTER+=1 
     
-    PROGRAM_COUNTER+=1       
+for i in memory_dump_list:
+    print(i, end = '\n')
