@@ -33,6 +33,7 @@ def eight_bit_decimal_to_binary(decimal):
 
 
 def sixteen_bit_decimal_to_binary(decimal):
+    '''Parses Sixteen Bit Binary Value from Decimal Value'''
     binary = str(bin(decimal))[2:]
     if len(binary) > 16:
         return binary[-17:-1]
