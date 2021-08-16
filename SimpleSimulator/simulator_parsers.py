@@ -24,6 +24,7 @@ def binary_to_decimal_parser(immediate):
     return decimal
 
 def eight_bit_decimal_to_binary(decimal):
+    '''Parses Eight Bit Binary Value from Decimal Value'''
     binary = str(bin(decimal))[2:]
     if len(binary) > 8:
         return binary[-9:-1]
