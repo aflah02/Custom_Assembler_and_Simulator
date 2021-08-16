@@ -12,6 +12,7 @@ def instruction_type_parser(opcode):
 
 
 def register_parser(register_code):
+    '''Parses Register Name from Register Code'''
     return encoding_to_register[register_code]
 
 
