@@ -7,6 +7,7 @@ def instruction_parser(opcode):
 
 
 def instruction_type_parser(opcode):
+    '''Parses Instruction Type from Opcode'''
     return opcode_table[opcode][1]
 
 
