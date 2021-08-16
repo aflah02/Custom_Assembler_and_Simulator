@@ -170,7 +170,9 @@ while(halt_encountered == False):
             mem_add = component_list[2]
             mem_addf = immediate_parser(mem_add)
             value_to_store =  "00000000" + eight_bit_decimal_to_binary(register_tracker[register_1])
-            memory_dump_list[total_lines] = value_to_store
+            print(mem_addf)
+            print(value_to_store)
+            memory_dump_list[mem_addf] = value_to_store
             total_lines+=1
         toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
         print(toPrint)
@@ -229,5 +231,5 @@ while(halt_encountered == False):
 
     PROGRAM_COUNTER+=1 
     
-# for i in memory_dump_list:
-#     print(i)
+for i in memory_dump_list:
+    print(i)
