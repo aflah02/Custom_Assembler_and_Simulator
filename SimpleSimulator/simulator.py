@@ -1,7 +1,7 @@
 from simulator_parsers import *
 from datatables import *
 from helpers import *
-import time
+import datetime
 import plotly.graph_objects as go
 
 register_tracker = {
@@ -278,8 +278,8 @@ for i in range(len(memory_dump_list)):
 for i in range(len(CYCLE_COUNTER_VALUES)):
     CYCLE_COUNTER_VALUES[i] += 1
 
-seconds = (time.time_ns() + 500) // 1000
-file_name = str(seconds)
+time = datetime.datetime.now()
+file_name = str(time)
 fig = go.Figure()
 fig.add_trace(go.Scatter(
     x=CYCLE_COUNTER_VALUES,
