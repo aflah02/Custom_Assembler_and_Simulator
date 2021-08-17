@@ -43,9 +43,15 @@ def type_b_executor(instruction, first_register, immediate):
     if instruction == 'movi':
         return immediate
     elif instruction == 'rs':
-        return register_tracker[first_register] >> immediate
+        right_shifted_value = register_tracker[first_register] >> immediate
+        sixteen_bits_last = sixteen_bit_decimal_to_binary(right_shifted_value)
+        right_shifted_value_to_be_returned = binary_to_decimal_parser(sixteen_bits_last)
+        return right_shifted_value_to_be_returned
     elif instruction == 'ls':
-        return register_tracker[first_register] << immediate
+        left_shifted_value = register_tracker[first_register] >> immediate
+        sixteen_bits_last = sixteen_bit_decimal_to_binary(left_shifted_value)
+        left_shifted_value_to_be_returned = binary_to_decimal_parser(sixteen_bits_last)
+        return left_shifted_value_to_be_returned
 
 def type_c_executor(instruction, first_register, second_register, flags_dict):
     if instruction == 'movr':
@@ -310,6 +316,5 @@ fig.update_layout(
     title_font_color="black",
     xaxis_title="Cycle Number",
     yaxis_title="Program Counter",
-
 )
 fig.write_image(f"images/{file_name}.png")
