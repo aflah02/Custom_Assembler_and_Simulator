@@ -120,6 +120,8 @@ while(halt_encountered == False):
         if instruction == 'add' or instruction == 'sub' or instruction == 'mul':
             if value_to_store > pow(2,16)-1 or value_to_store < 0:
                 flags['V'] = 1
+                binary_overflowed_last_sixteen_bits = sixteen_bit_decimal_to_binary(value_to_store)
+                register_tracker[register_1] = binary_to_decimal_parser(binary_overflowed_last_sixteen_bits)
             else:
                 register_tracker[register_1] = value_to_store
         else:
@@ -275,7 +277,7 @@ for i in range(len(memory_dump_list)):
 
 for i in range(len(CYCLE_COUNTER_VALUES)):
     CYCLE_COUNTER_VALUES[i] += 1
-    
+
 seconds = (time.time_ns() + 500) // 1000
 file_name = str(seconds)
 fig = go.Figure()
