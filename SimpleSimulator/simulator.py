@@ -1,7 +1,8 @@
 from simulator_parsers import *
 from datatables import *
 from helpers import *
-
+import time
+import plotly.graph_objects as go
 
 register_tracker = {
     'R0': 0,
@@ -102,7 +103,6 @@ def printOutput(PC, reg_dict, flags_dict):
 while(halt_encountered == False):
     CYCLE_COUNTER_VALUES.append(CYCLE_COUNTER)
     PROGRAM_COUNTER_LOCATION.append(PROGRAM_COUNTER)
-    CYCLE_COUNTER += 1
     binary_instruction = ls_inputs[PROGRAM_COUNTER]
     opcode = binary_instruction[0:5]
     instruction = opcode_table[opcode][0]
@@ -118,7 +118,7 @@ while(halt_encountered == False):
         register_3 = encoding_to_register[component_list[3]]
         value_to_store = type_a_executor(instruction, register_2, register_3)
         if instruction == 'add' or instruction == 'sub' or instruction == 'mul':
-            if value_to_store > 255 or value_to_store < 0:
+            if value_to_store > pow(2,16)-1 or value_to_store < 0:
                 flags['V'] = 1
             else:
                 register_tracker[register_1] = value_to_store
@@ -176,12 +176,16 @@ while(halt_encountered == False):
             value_to_store = value_to_store[8:]
             value_to_storef = binary_to_decimal_parser(value_to_store)
             register_tracker[register_1] = value_to_storef
+            PROGRAM_COUNTER_LOCATION.append(mem_addf)
+            CYCLE_COUNTER_VALUES.append(CYCLE_COUNTER)
         if instruction == 'st':
             register_1 = encoding_to_register[component_list[1]]
             mem_add = component_list[2]
             mem_addf = binary_to_decimal_parser(mem_add)
             value_to_store =  "00000000" + eight_bit_decimal_to_binary(register_tracker[register_1])
             memory_dump_list[mem_addf] = value_to_store
+            PROGRAM_COUNTER_LOCATION.append(mem_addf)
+            CYCLE_COUNTER_VALUES.append(CYCLE_COUNTER)
         toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
         print(toPrint)
     elif instruction_type == 'E':
@@ -195,6 +199,7 @@ while(halt_encountered == False):
             flags['L'] = 0
             toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
             print(toPrint)
+            CYCLE_COUNTER+=1
             continue
         if instruction == 'jlt':
             if flags['L']==1:
@@ -205,6 +210,7 @@ while(halt_encountered == False):
                 flags['L'] = 0
                 toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
                 print(toPrint)
+                CYCLE_COUNTER+=1
                 continue
             else:
                 flags['E'] = 0
@@ -222,6 +228,7 @@ while(halt_encountered == False):
                 flags['L'] = 0
                 toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
                 print(toPrint)
+                CYCLE_COUNTER+=1
                 continue
             else:
                 flags['E'] = 0
@@ -239,6 +246,7 @@ while(halt_encountered == False):
                 flags['L'] = 0
                 toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
                 print(toPrint)
+                CYCLE_COUNTER+=1
                 continue
             else:
                 flags['E'] = 0
@@ -256,12 +264,27 @@ while(halt_encountered == False):
             halt_encountered = True
             toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
             print(toPrint)
+            CYCLE_COUNTER+=1
             continue
 
     PROGRAM_COUNTER+=1 
+    CYCLE_COUNTER+=1
     
 for i in range(len(memory_dump_list)):
     print(memory_dump_list[i])
 
-# import matplotlib.pyplot as plt
-# plt.scatter(CYCLE_COUNTER_VALUES, PROGRAM_COUNTER_LOCATION)
+for i in range(len(CYCLE_COUNTER_VALUES)):
+    CYCLE_COUNTER_VALUES[i] += 1
+    
+seconds = (time.time_ns() + 500) // 1000
+file_name = str(seconds)
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    x=CYCLE_COUNTER_VALUES,
+    y=PROGRAM_COUNTER_LOCATION,
+    mode="markers",
+    marker=go.scatter.Marker(
+        colorscale="Viridis"
+    )
+))
+fig.write_image(f"images/{file_name}.png")
