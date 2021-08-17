@@ -285,8 +285,31 @@ fig.add_trace(go.Scatter(
     x=CYCLE_COUNTER_VALUES,
     y=PROGRAM_COUNTER_LOCATION,
     mode="markers",
-    marker=go.scatter.Marker(
-        colorscale="Viridis"
+    marker=dict(
+        color='steelblue',
+        size=5,
+        line=dict(
+            color='steelblue',
+            width=2
+        )
     )
 ))
+fig.update_layout(
+    title = {
+        'text' : 'Memory Address v/s Cycle Number',
+        'y':0.9,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+    width=1000,
+    height=1000,
+    font_family="Times New Roman",
+    font_color="red",
+    title_font_family="Times New Roman",
+    title_font_color="black",
+    xaxis_title="Cycle Number",
+    yaxis_title="Program Counter",
+
+)
 fig.write_image(f"images/{file_name}.png")
