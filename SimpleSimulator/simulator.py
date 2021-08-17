@@ -43,15 +43,17 @@ def type_b_executor(instruction, first_register, immediate):
     if instruction == 'movi':
         return immediate
     elif instruction == 'rs':
-        right_shifted_value = register_tracker[first_register] >> immediate
-        sixteen_bits_last = sixteen_bit_decimal_to_binary(right_shifted_value)
-        right_shifted_value_to_be_returned = binary_to_decimal_parser(sixteen_bits_last)
-        return right_shifted_value_to_be_returned
+        # right_shifted_value = register_tracker[first_register] >> immediate
+        # sixteen_bits_last = sixteen_bit_decimal_to_binary(right_shifted_value)
+        # right_shifted_value_to_be_returned = binary_to_decimal_parser(sixteen_bits_last)
+        # return right_shifted_value_to_be_returned
+        return register_tracker[first_register] >> immediate
     elif instruction == 'ls':
-        left_shifted_value = register_tracker[first_register] >> immediate
-        sixteen_bits_last = sixteen_bit_decimal_to_binary(left_shifted_value)
-        left_shifted_value_to_be_returned = binary_to_decimal_parser(sixteen_bits_last)
-        return left_shifted_value_to_be_returned
+        # left_shifted_value = register_tracker[first_register] >> immediate
+        # sixteen_bits_last = sixteen_bit_decimal_to_binary(left_shifted_value)
+        # left_shifted_value_to_be_returned = binary_to_decimal_parser(sixteen_bits_last)
+        # return left_shifted_value_to_be_returned
+        return register_tracker[first_register] << immediate
 
 def type_c_executor(instruction, first_register, second_register, flags_dict):
     if instruction == 'movr':
