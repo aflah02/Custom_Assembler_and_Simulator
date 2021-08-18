@@ -283,9 +283,6 @@ while(halt_encountered == False):
 for i in range(len(memory_dump_list)):
     print(memory_dump_list[i])
 
-for i in range(len(CYCLE_COUNTER_VALUES)):
-    CYCLE_COUNTER_VALUES[i] += 1
-
 time = datetime.datetime.now()
 file_name = str(time)
 fig = go.Figure()
