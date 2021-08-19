@@ -65,7 +65,14 @@ def type_c_executor(instruction, first_register, second_register, flags_dict):
         a, b = register_tracker[first_register], register_tracker[second_register]
         return (a//b, a%b)
     elif instruction == 'not':
-        return ~(register_tracker[second_register])
+        sixteen_bit_binary = str(sixteen_bit_decimal_to_binary(register_tracker[second_register]))
+        output_string = ''
+        for i in sixteen_bit_binary:
+            if i == '0':
+                output_string += '1'
+            else:
+                output_string += '0'
+        return binary_to_decimal_parser(output_string)
     elif instruction == 'cmp':
         a, b = register_tracker[first_register], register_tracker[second_register]
         if a==b:
@@ -125,13 +132,20 @@ while(halt_encountered == False):
         register_2 = encoding_to_register[component_list[2]]
         register_3 = encoding_to_register[component_list[3]]
         value_to_store = type_a_executor(instruction, register_2, register_3)
-        if instruction == 'add' or instruction == 'sub' or instruction == 'mul':
+        if instruction == 'add' or instruction == 'mul':
             if value_to_store > pow(2,16)-1 or value_to_store < 0:
                 flags['V'] = 1
                 binary_overflowed_last_sixteen_bits = sixteen_bit_decimal_to_binary(value_to_store)
                 register_tracker[register_1] = binary_to_decimal_parser(binary_overflowed_last_sixteen_bits)
             else:
                 register_tracker[register_1] = value_to_store
+        if instruction == 'sub':
+            if value_to_store > pow(2,16)-1 or value_to_store < 0:
+                flags['V'] = 1
+                register_tracker[register_1] = 0
+            else:
+                register_tracker[register_1] = value_to_store
+            pass
         else:
             register_tracker[register_1] = value_to_store
         toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)

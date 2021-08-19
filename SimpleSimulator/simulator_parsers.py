@@ -20,7 +20,8 @@ def binary_to_decimal_parser(immediate):
     '''Parses Decimal Value from Binary Value'''
     decimal = 0
     for digit in immediate:
-        decimal= decimal*2 + int(digit)
+        if digit.isalpha() == False:
+            decimal= decimal*2 + int(digit)
     return decimal
 
 def eight_bit_decimal_to_binary(decimal):
