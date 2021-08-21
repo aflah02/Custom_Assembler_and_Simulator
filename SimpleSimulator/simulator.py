@@ -326,6 +326,6 @@ fig.update_layout(
     title_font_family="Times New Roman",
     title_font_color="black",
     xaxis_title="Cycle Number",
-    yaxis_title="Program Counter",
+    yaxis_title="Memory Address",
 )
 fig.write_image(f"images/{file_name}.png")
