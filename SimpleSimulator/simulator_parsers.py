@@ -20,7 +20,7 @@ def binary_to_decimal_parser(immediate):
     '''Parses Decimal Value from Binary Value'''
     decimal = 0
     for digit in immediate:
-        if digit.isalpha() == False:
+        if digit.isalpha() == False and digit != '\r':
             decimal= decimal*2 + int(digit)
     return decimal
 

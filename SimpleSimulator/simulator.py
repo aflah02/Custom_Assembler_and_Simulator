@@ -197,7 +197,6 @@ while(halt_encountered == False):
             mem_add = component_list[2]
             mem_addf = binary_to_decimal_parser(mem_add)
             value_to_store = memory_dump_list[mem_addf]
-            value_to_store = value_to_store[8:]
             value_to_storef = binary_to_decimal_parser(value_to_store)
             register_tracker[register_1] = value_to_storef
             PROGRAM_COUNTER_LOCATION.append(mem_addf)
@@ -206,7 +205,7 @@ while(halt_encountered == False):
             register_1 = encoding_to_register[component_list[1]]
             mem_add = component_list[2]
             mem_addf = binary_to_decimal_parser(mem_add)
-            value_to_store =  "00000000" + eight_bit_decimal_to_binary(register_tracker[register_1])
+            value_to_store =  sixteen_bit_decimal_to_binary(register_tracker[register_1])
             memory_dump_list[mem_addf] = value_to_store
             PROGRAM_COUNTER_LOCATION.append(mem_addf)
             CYCLE_COUNTER_VALUES.append(CYCLE_COUNTER)
@@ -216,24 +215,24 @@ while(halt_encountered == False):
         mem_add = binary_instruction[8::]
         mem_addf =  binary_to_decimal_parser(mem_add)
         if instruction == 'jmp':
-            PROGRAM_COUNTER = mem_addf
             flags['E'] = 0
             flags['V'] = 0
             flags['G'] = 0
             flags['L'] = 0
             toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
             print(toPrint)
+            PROGRAM_COUNTER = mem_addf
             CYCLE_COUNTER+=1
             continue
         if instruction == 'jlt':
             if flags['L']==1:
-                PROGRAM_COUNTER = mem_addf
                 flags['E'] = 0
                 flags['V'] = 0
                 flags['G'] = 0
                 flags['L'] = 0
                 toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
                 print(toPrint)
+                PROGRAM_COUNTER = mem_addf
                 CYCLE_COUNTER+=1
                 continue
             else:
@@ -245,13 +244,13 @@ while(halt_encountered == False):
                 print(toPrint)
         if instruction == 'jgt':
             if flags['G']==1:
-                PROGRAM_COUNTER = mem_addf
                 flags['E'] = 0
                 flags['V'] = 0
                 flags['G'] = 0
                 flags['L'] = 0
                 toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
                 print(toPrint)
+                PROGRAM_COUNTER = mem_addf
                 CYCLE_COUNTER+=1
                 continue
             else:
@@ -263,13 +262,13 @@ while(halt_encountered == False):
                 print(toPrint)
         if instruction == 'je':
             if flags['E']==1:
-                PROGRAM_COUNTER = mem_addf
                 flags['E'] = 0
                 flags['V'] = 0
                 flags['G'] = 0
                 flags['L'] = 0
                 toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
                 print(toPrint)
+                PROGRAM_COUNTER = mem_addf
                 CYCLE_COUNTER+=1
                 continue
             else:
@@ -284,12 +283,11 @@ while(halt_encountered == False):
         flags['V'] = 0
         flags['G'] = 0
         flags['L'] = 0
-        if instruction == 'hlt':
-            halt_encountered = True
-            toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
-            print(toPrint)
-            CYCLE_COUNTER+=1
-            continue
+        halt_encountered = True
+        toPrint = printOutput(PROGRAM_COUNTER, register_tracker, flags)
+        print(toPrint)
+        CYCLE_COUNTER+=1
+        continue
 
     PROGRAM_COUNTER+=1 
     CYCLE_COUNTER+=1
