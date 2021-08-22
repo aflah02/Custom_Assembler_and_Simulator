@@ -4,6 +4,7 @@ from helpers import *
 import datetime
 import plotly.graph_objects as go
 
+
 register_tracker = {
     'R0': 0,
     'R1': 0,
