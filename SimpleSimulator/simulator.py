@@ -298,6 +298,7 @@ for i in range(len(memory_dump_list)):
 time = datetime.datetime.now()
 file_name = str(time)
 fig = go.Figure()
+
 fig.add_trace(go.Scatter(
     x=CYCLE_COUNTER_VALUES,
     y=PROGRAM_COUNTER_LOCATION,
@@ -311,6 +312,7 @@ fig.add_trace(go.Scatter(
         )
     )
 ))
+
 fig.update_layout(
     title = {
         'text' : 'Memory Address v/s Cycle Number',
@@ -328,4 +330,5 @@ fig.update_layout(
     xaxis_title="Cycle Number",
     yaxis_title="Memory Address",
 )
+
 fig.write_image(f"images/{file_name}.png")
