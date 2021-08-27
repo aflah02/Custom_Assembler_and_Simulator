@@ -93,6 +93,9 @@ for i in range(len(ls_inputs)):
     if line_comp[0] == 'movi' or line_comp[0] == 'movr':
         error_tracker.append(f'ERROR: No Such Instruction Found as {line_comp[0]} for instruction {i+1}')
     if line_comp[0] == 'mov':
+        if len(line_comp) < 2:
+            error_tracker.append(f'ERROR: Invalid Instruction size for mov on line number {i+1}')
+            break
         if line_comp[1] == 'FLAGS':
             error_tracker.append(f'ERROR: Invalid Use of FLAGS on line number {i+1}')
         if line_comp[-1][0] == '$':
