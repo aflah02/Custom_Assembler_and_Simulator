@@ -140,7 +140,7 @@ while(halt_encountered == False):
                 register_tracker[register_1] = binary_to_decimal_parser(binary_overflowed_last_sixteen_bits)
             else:
                 register_tracker[register_1] = value_to_store
-        if instruction == 'sub':
+        elif instruction == 'sub':
             if value_to_store > pow(2,16)-1 or value_to_store < 0:
                 flags['V'] = 1
                 register_tracker[register_1] = 0
