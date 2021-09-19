@@ -1,0 +1,60 @@
+var correct
+var count
+var output
+var zero
+var one
+var two
+var eight
+var ten
+var input
+st R2 zero
+mov R2 $1
+st R2 one
+st R2 correct
+mov R2 $2
+st R2 two
+mov R2 $8
+st R2 eight
+mov R2 $10
+st R2 ten
+mov R2 $221
+st R2 input
+mov R2 $0
+st R2 output
+loop: ld R2 count
+ld R3 two
+div R2 R3
+ld R4 one
+add R2 R2 R4
+st R2 count
+cmp R1 R4
+je subvalue
+jmp addvalue    
+addvalue: ld R2 input
+ld R3 ten
+div R2 R3
+ld R4 output
+add R4 R4 R1
+st R0 input
+st R4 output
+jmp cond
+subvalue: ld R2 input
+ld R3 ten
+ld R4 output
+div R2 R3
+sub R4 R4 R1
+mov R5 FLAGS
+st R0 input
+st R4 output
+ld R0 eight
+cmp R0 R5
+je overflow
+jmp cond
+overflow: ld R0 zero
+st R0 correct
+cond: ld R0 input
+ld R1 zero
+cmp R0 R1
+je end
+jmp loop
+end: hlt

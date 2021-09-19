@@ -1,0 +1,48 @@
+var correct
+var output
+var count
+var x
+var y
+mov R0 $0
+mov R1 $0
+mov R2 $5
+mov R3 $1
+mov R4 $2
+st R3 x
+st R3 y
+st R3 output
+st R3 correct
+sub R2 R2 R3
+cmp R2 R0
+je end
+loop: ld R6 count
+div R6 R4
+add R6 R6 R3
+st R6 count
+cmp R1 R3
+je if
+jmp else
+if: ld R0 x
+ld R1 y 
+add R0 R1 R0
+mov R6 FLAGS
+st R0 x
+st R0 output
+rs R6 $3
+cmp R6 R3
+je overflow
+jmp cond
+else: ld R0 x
+ld R1 y
+add R1 R0 R1
+mov R6 FLAGS
+st R1 y
+st R1 output
+cmp R6 R3
+je overflow
+cond: ld R0 count 
+cmp R0 R2
+je end
+jmp loop
+overflow: st R5 correct
+end: hlt

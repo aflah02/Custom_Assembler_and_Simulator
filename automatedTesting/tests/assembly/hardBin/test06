@@ -1,0 +1,13 @@
+var a
+var b
+var c
+mov R1 $8
+mov R2 $9
+mov R3 $0
+mov R4 $255
+st R1 a
+st R2 b
+st R3 c
+cmp R1 R2
+jlt lab
+lab: hlt

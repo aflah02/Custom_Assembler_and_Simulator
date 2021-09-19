@@ -1,0 +1,4 @@
+var x
+mov R1 $100
+st R1 x
+hlt

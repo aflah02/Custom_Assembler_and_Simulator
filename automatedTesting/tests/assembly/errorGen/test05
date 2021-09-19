@@ -1,0 +1,4 @@
+var x
+mov R1 $4
+st R1 y
+hlt

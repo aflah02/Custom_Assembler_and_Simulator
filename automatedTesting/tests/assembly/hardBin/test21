@@ -1,0 +1,31 @@
+var x
+var y
+var z
+var x1
+var y1
+var z1
+var count
+mov R1 $5
+mov R2 $1
+loop: ld R3 count
+add R3 R2 R3
+st R3 count
+ld R4 x1
+ld R5 y1
+ld R6 z1
+ld R4 x
+ld R5 y
+ld R6 z
+add R4 R2 R4
+add R5 R4 R5
+add R6 R5 R6
+st R4 z
+st R5 y
+st R6 x
+st R4 z1
+st R5 y1
+st R6 x1
+cmp R3 R1
+je end
+jmp loop
+end: hlt

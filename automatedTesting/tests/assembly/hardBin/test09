@@ -1,0 +1,32 @@
+var count
+var value1
+var value2
+mov R0 $0
+mov R1 $1
+mov R2 $1
+mov R3 $0
+mov R4 $0
+mov R5 $8
+start: ld R0 count
+add R0 R0 R1
+st R0 count
+st R2 value1
+st R3 value2
+cmp R2 R3
+jgt if
+jmp else
+if: add R3 R2 R3
+mov R4 FLAGS
+and R4 R5 R4
+cmp R4 R5
+je overflow
+jmp start
+else: add R2 R2 R3 
+mov R4 FLAGS
+and R4 R4 R5
+cmp R5 R4
+je overflow
+jmp start
+overflow: ld R2 value1
+ld R3 value2
+hlt

@@ -1,0 +1,4 @@
+mov R3 $10
+mov R4 $20
+div R3 R4
+hlt

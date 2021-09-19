@@ -1,0 +1,18 @@
+var count
+var sum
+mov R2 $255
+mov R3 $0
+mov R4 $10
+mov R6 $1
+loop: ld R5 count
+add R5 R5 R6
+st R5 count
+ld R5 sum
+div R2 R4
+add R5 R5 R1
+mov R2 R0
+st R5 sum
+cmp R2 R3
+je end
+jmp loop
+end: hlt

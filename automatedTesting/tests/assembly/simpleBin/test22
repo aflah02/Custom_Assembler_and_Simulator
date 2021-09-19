@@ -1,0 +1,4 @@
+mov R0		 $1
+mov R1     $2
+   	 add R2		R0	R1
+ hlt

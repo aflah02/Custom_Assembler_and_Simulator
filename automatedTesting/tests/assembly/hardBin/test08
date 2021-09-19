@@ -1,0 +1,16 @@
+var zero
+var count
+mov R1 $0
+mov R2 $2
+mov R3 $1
+mov R5 $8
+mov R6 $1
+label: add R1 R6 R1
+mul R3 R2 R3
+mov R4 FLAGS
+and R4 R4 R5
+cmp R4 R5
+jlt label
+st R3 zero
+st R1 count
+hlt

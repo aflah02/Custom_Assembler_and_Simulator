@@ -1,0 +1,5 @@
+var xyz
+var abc
+
+add R0 xyz
+hlt

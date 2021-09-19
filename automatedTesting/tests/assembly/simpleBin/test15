@@ -1,0 +1,2 @@
+cmp R1 R2
+hlt

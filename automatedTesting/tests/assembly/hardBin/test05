@@ -1,0 +1,7 @@
+mov R1 $8
+mov R2 $9
+cmp R2 R1
+jgt end
+lab:	add R3 R2 R1
+    	jmp lab
+end:    hlt

@@ -1,4 +1,0 @@
-var x
-mov R1 $5
-st R1 x
-hlt

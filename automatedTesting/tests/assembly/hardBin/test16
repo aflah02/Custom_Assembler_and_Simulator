@@ -1,0 +1,25 @@
+var fact
+var count
+var correct
+mov R1 $0
+mov R2 $1
+mov R5 $8
+st R2 fact
+loop: ld R6 count
+ld R3 fact
+mul R3 R1 R3
+mov R4 FLAGS
+and R4 R4 R5
+cmp R4 R5
+je incorrect_overflow
+add R6 R2 R6
+st R6 count
+st R3 fact
+sub R1 R1 R2
+mov R4 FLAGS
+and R4 R4 R5
+cmp R4 R5
+je correct_overflow
+jmp loop
+correct_overflow: st R2 correct
+incorrect_overflow: hlt

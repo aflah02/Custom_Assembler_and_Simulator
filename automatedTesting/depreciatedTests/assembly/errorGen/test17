@@ -1,0 +1,24 @@
+var xyz
+var abc
+mylabel:
+add R0 R1 R2
+sub	R0 R1 R2
+mov	R0 $100
+mov	R1 R2
+mov R5 FLAGS
+ld R5 myvar
+st R5 myvar
+mul R6 R1 R1
+div	R1 R3
+rs R1 $2
+ls R1 $1
+xor	R0 R1 R2		
+mylabel: or R0 R1 R1
+and R0 R1 R2
+not R5 R1
+cmp	R1 R6
+jmp mylabel
+jlt	mylabel
+jgt mylabel
+je mylabel
+hlt
